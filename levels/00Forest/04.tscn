@@ -132,7 +132,7 @@ _data = {
 z_index = 256
 position = Vector2(0, 44)
 script = ExtResource("1_mse3s")
-width = 928
+width = 1024
 height = 302
 metadata/_custom_type_script = "uid://b8r2sphs8h8st"
 
@@ -389,7 +389,7 @@ libraries = {
 autoplay = "idlegg"
 
 [node name="LevelTransition" parent="." instance=ExtResource("6_isurk")]
-position = Vector2(936, 328)
+position = Vector2(1024, 328)
 size = 12
 location = 1
 target_level = "uid://bxeftv3hdojwp"

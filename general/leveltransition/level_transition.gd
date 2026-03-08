@@ -70,7 +70,6 @@ func on_new_scene_ready( target_name : String , offset : Vector2 ) -> void :
 			
 	pass
 
-
 func on_load_scene_finished() -> void :
 	area_2d.monitoring = false
 	area_2d.body_entered.connect( _on_player_entered )

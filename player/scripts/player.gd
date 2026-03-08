@@ -11,13 +11,22 @@ const DEBUGGER = preload("uid://db0arhrb4qi4x")
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 @onready var drop_down_shape_cast: ShapeCast2D = %DropDownShapeCast
 @onready var point_light_2d: PointLight2D = %PointLight2D
+@onready var cur_hp: Label = $Debugger/curHp
 
 
 #endregion
 #region /// export variables 
+@export var player_hp : float = 20
+@export var player_max_hp : float = 20
+@export var double_jump : bool = false
+@export var dash_skill : bool = false
+@export var ground_slam : bool = false
+@export var morph_roll : bool = false
+
+@export var light_source_energy : float = 0.7
 @export var movespeed : float = 150
 @export var maxfallspeed : float = 600
-@export var doubleJumpUnlocked : bool = false
+
 #endregion
 
 #region /// state machine variables 
@@ -41,6 +50,10 @@ var gravity_multiplier : float = 1.0
 
 func _ready() -> void:
 	#clear player if is already preset in node
+	point_light_2d.energy = light_source_energy
+	cur_hp.text = "HP:" + str(int(player_hp)) + "/" + str(int(player_max_hp))
+	
+	Messages.player_healed.connect(on_player_healed)
 	
 	if get_tree().get_first_node_in_group("Player") != self:
 		self.queue_free()
@@ -63,7 +76,11 @@ func _physics_process(_delta: float) -> void:
 	pass
 
 func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("action"):
+		Messages.player_interacted.emit(self)
+	
 	change_state( current_state.handle_input(event))
+	
 	pass
 	
 func initialize_states() -> void:
@@ -126,7 +143,6 @@ func update_direction() -> void :
 	pass
 
 func enable_point_light_2d(value : bool) -> void :
-	print("call function : " + str(value))
 	point_light_2d.enabled = value
 	pass
 
@@ -137,4 +153,13 @@ func add_debugger( color : Color = Color.RED) -> void :
 	d.modulate = color
 	await get_tree().create_timer(3.0).timeout
 	d.queue_free()
+	pass
+
+func on_player_healed( amount : float )->void : 
+	player_hp += amount
+	
+	if player_hp > player_max_hp:
+		player_hp = player_max_hp
+		
+	cur_hp.text = "HP:" + str(int(player_hp)) + "/" + str(int(player_max_hp))
 	pass

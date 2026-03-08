@@ -24,10 +24,8 @@ metadata/_custom_type_script = "uid://b8r2sphs8h8st"
 [node name="LevelTransition" parent="." instance=ExtResource("3_4du0i")]
 position = Vector2(0, 224)
 size = 9
-target_level = "uid://duybngp0d40wa"
 
 [node name="LevelTransition2" parent="." instance=ExtResource("3_4du0i")]
 position = Vector2(288, 384)
 size = 5
 location = 3
-target_level = "uid://8juvx47je5kc"

@@ -34,7 +34,7 @@ func handle_input( event : InputEvent ) -> PlayerState :
 	if event.is_action_pressed("jump"):
 		if coyoteTimer > 0:
 			return jump
-		elif playerHasDoubleJumped == false and player.doubleJumpUnlocked : 
+		elif playerHasDoubleJumped == false and player.double_jump : 
 			playerHasDoubleJumped = true
 			return jump
 		else :
