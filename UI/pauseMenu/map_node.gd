@@ -17,7 +17,7 @@ var indicator_offset : Vector2 = Vector2.ZERO # player location in map
 
 @onready var label: Label = $Label
 @onready var transition_blocks: Control = %TransitionBlocks
-
+  
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		pass

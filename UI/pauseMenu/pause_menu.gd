@@ -6,7 +6,7 @@ var player : Player
 @onready var pause_screen: Control = %PauseScreen
 @onready var system_screen: Control = %SystemScreen
 
-
+  
 #buttons
 @onready var system_menu_button: Button = $Control/PauseScreen/SystemMenuButton
 
