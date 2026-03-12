@@ -133,87 +133,107 @@ grow_vertical = 2
 [node name="MapNode" parent="Control/PauseScreen/Map" instance=ExtResource("2_bwi2f")]
 modulate = Color(0.23222783, 0.58825254, 0.28502172, 1)
 layout_mode = 0
-offset_left = 56.0
-offset_top = 57.0
-offset_right = 92.0
-offset_bottom = 66.0
+offset_left = 16.0
+offset_top = 80.0
+offset_right = 52.0
+offset_bottom = 89.0
 linkedscene = "uid://ci7ccefelmweo"
 entrance_right = Array[float]([2.0])
 
 [node name="MapNode2" parent="Control/PauseScreen/Map" instance=ExtResource("2_bwi2f")]
-modulate = Color(0.23222783, 0.58825254, 0.28502172, 1)
+modulate = Color(0.23137255, 0.5882353, 0.28627452, 1)
 layout_mode = 0
-offset_left = 93.0
-offset_top = 33.0
-offset_right = 116.0
-offset_bottom = 66.0
+offset_left = 53.0
+offset_top = 57.0
+offset_right = 76.0
+offset_bottom = 89.0
 linkedscene = "uid://bxeftv3hdojwp"
-entrance_right = Array[float]([11.7])
-entrance_left = Array[float]([26.2, 2.1999998, 12.6])
+entrance_right = Array[float]([25.175, 6.6000004])
+entrance_left = Array[float]([25.0, 2.0])
 
 [node name="MapNode3" parent="Control/PauseScreen/Map" instance=ExtResource("2_bwi2f")]
-modulate = Color(0.23222783, 0.58825254, 0.28502172, 1)
+modulate = Color(0.23137255, 0.5882353, 0.28627452, 1)
 layout_mode = 0
-offset_left = 117.0
-offset_top = 43.0
-offset_right = 143.0
-offset_bottom = 50.0
+offset_left = 77.0
+offset_top = 62.0
+offset_right = 103.0
+offset_bottom = 69.0
 linkedscene = "uid://c8gmvxta88vqt"
-entrance_bottom = Array[float]([12.6])
+entrance_bottom = Array[float]([12.8])
 entrance_left = Array[float]([2.0])
 
 [node name="MapNode4" parent="Control/PauseScreen/Map" instance=ExtResource("2_bwi2f")]
-modulate = Color(0.23222783, 0.58825254, 0.28502172, 1)
+modulate = Color(0.23137255, 0.5882353, 0.28627452, 1)
 layout_mode = 0
-offset_left = 66.0
-offset_top = 32.0
-offset_right = 92.0
-offset_bottom = 40.0
+offset_left = 25.0
+offset_top = 56.0
+offset_right = 52.0
+offset_bottom = 64.0
 linkedscene = "uid://cni8y1vqkjdg6"
 entrance_right = Array[float]([3.0])
 
 [node name="MapNode5" parent="Control/PauseScreen/Map" instance=ExtResource("2_bwi2f")]
-modulate = Color(0.98199487, 0.38766775, 0.9739824, 1)
+modulate = Color(1, 0.5019608, 1, 1)
 layout_mode = 0
-offset_left = 80.0
-offset_top = 44.0
-offset_right = 92.0
-offset_bottom = 51.0
+offset_left = 77.0
+offset_top = 80.0
+offset_right = 89.0
+offset_bottom = 87.0
 linkedscene = "uid://bjdssrin5gtmt"
 entrance_right = Array[float]([2.0])
+entrance_left = Array[float]([2.0])
 
 [node name="MapNode6" parent="Control/PauseScreen/Map" instance=ExtResource("2_bwi2f")]
-modulate = Color(0.29611, 0.20083857, 0.39138144, 1)
+modulate = Color(0.42075735, 0.18277118, 0.73081446, 1)
 layout_mode = 0
-offset_left = 128.0
-offset_top = 51.0
-offset_right = 152.0
-offset_bottom = 58.0
+offset_left = 88.0
+offset_top = 70.0
+offset_right = 112.0
+offset_bottom = 77.0
 linkedscene = "uid://c7k1mg2cgsk88"
 entrance_top = Array[float]([2.0])
 entrance_bottom = Array[float]([16.8])
 
 [node name="MapNode7" parent="Control/PauseScreen/Map" instance=ExtResource("2_bwi2f")]
-modulate = Color(0.29611, 0.20083857, 0.39138144, 1)
+modulate = Color(0.41960785, 0.18431373, 0.7294118, 1)
 layout_mode = 0
-offset_left = 143.0
-offset_top = 59.0
-offset_right = 158.0
-offset_bottom = 75.0
+offset_left = 103.0
+offset_top = 78.0
+offset_right = 118.0
+offset_bottom = 94.0
 linkedscene = "uid://bwfo3fano2fhp"
 entrance_top = Array[float]([2.0])
+entrance_right = Array[float]([11.0])
 entrance_left = Array[float]([11.0])
+
+[node name="MapNode8" parent="Control/PauseScreen/Map" instance=ExtResource("2_bwi2f")]
+modulate = Color(0.41960785, 0.18431373, 0.7294118, 1)
+layout_mode = 0
+offset_left = 90.0
+offset_top = 79.0
+offset_right = 102.0
+offset_bottom = 94.0
+linkedscene = "uid://cd8wsqtv3c0g2"
+entrance_right = Array[float]([10.0])
+entrance_left = Array[float]([2.8000002])
 
 [node name="PlayerIndicator" type="Control" parent="Control/PauseScreen/Map"]
 unique_name_in_owner = true
 anchors_preset = 0
 
 [node name="TextureRect" type="TextureRect" parent="Control/PauseScreen/Map/PlayerIndicator"]
-layout_mode = 0
-offset_left = 56.0
-offset_top = 60.0
-offset_right = 62.0
-offset_bottom = 66.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -3.0
+offset_top = -3.0
+offset_right = 3.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = SubResource("GradientTexture2D_b0dtj")
 
 [node name="AnimationTree" type="AnimationPlayer" parent="Control/PauseScreen/Map/PlayerIndicator"]
