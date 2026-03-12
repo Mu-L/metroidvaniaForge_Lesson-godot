@@ -30,7 +30,7 @@ func save_game() -> void :
 		"ground_slam" : player.ground_slam,
 		"morph_roll" : player.morph_roll,
 		"discovered_areas" : discovered_areas,
-		"persistent_data" : {},
+		"persistent_data" : persistent_data,
 	}
 	var save_file = FileAccess.open(get_filename( current_slot ), FileAccess.WRITE)
 	save_file.store_line( JSON.stringify(save_data)) 
@@ -52,7 +52,7 @@ func create_new_game_save( slot : int  ) -> void :
 		"ground_slam" : false,
 		"morph_roll" : false,
 		"discovered_areas" : discovered_areas,
-		"persistent_data" : {},
+		"persistent_data" : persistent_data,
 	}
 	#save your file
 	var save_file = FileAccess.open(get_filename( current_slot ), FileAccess.WRITE)
