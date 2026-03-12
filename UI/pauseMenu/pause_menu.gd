@@ -6,8 +6,10 @@ var player : Player
 @onready var pause_screen: Control = %PauseScreen
 @onready var system_screen: Control = %SystemScreen
 
+
 #buttons
-@onready var system_menu_button: Button = $PauseScreen/SystemMenuButton
+@onready var system_menu_button: Button = $Control/PauseScreen/SystemMenuButton
+
 @onready var backto_map_button: Button = %backtoMapButton
 @onready var backto_title_button: Button = %backtoTitleButton
 
@@ -15,6 +17,7 @@ var player : Player
 @onready var music_slider: HSlider = %MusicSlider
 @onready var sound_fx: HSlider = %SoundFx
 @onready var ui_slider: HSlider = %UISlider
+ 
 #endregion
 
 func _ready() -> void:

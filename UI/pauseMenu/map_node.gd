@@ -155,18 +155,14 @@ func create_door_block () -> ColorRect :
 	block.custom_minimum_size.x = 1
 	block.custom_minimum_size.y = 1
 	return block
-
+ 
+	
 func display_player_location() -> void :
 	var player : Player = get_tree().get_first_node_in_group("Player")
 	var i : Control = %PlayerIndicator
 	var pos : Vector2 = position
-	
 	pos += ((player.global_position - indicator_offset) / SCALE_FACTOR)
+	var clamped : Vector2 = Vector2(3,3)
+	pos = pos.clamp(position + clamped, position + size - clamped)
 	i.position = pos
-	var clamppos : Vector2 = Vector2(4,4)
-	pos = pos.clamp(position + clamppos,position + size - clamppos)
-	#get player location 
-	#add player indication
-	#position equivalent to mini map
-	
 	pass

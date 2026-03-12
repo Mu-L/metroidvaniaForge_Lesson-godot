@@ -19,6 +19,21 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
 metadata/_snap_enabled = true
 
+[sub_resource type="Animation" id="Animation_4f6j8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_888h5"]
 resource_name = "blink"
 loop_mode = 1
@@ -34,21 +49,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_4f6j8"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_p1bgv"]
@@ -103,9 +103,9 @@ theme_override_colors/font_color = Color(0.55430925, 0.1090158, 0.10581977, 1)
 theme_override_fonts/font = SubResource("FontVariation_1y6f3")
 text = "PAUSED"
 
-[node name="PauseScreen" type="Control" parent="."]
+[node name="PauseScreen" type="Control" parent="Control"]
 unique_name_in_owner = true
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -113,14 +113,14 @@ offset_top = 32.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Map" type="Control" parent="PauseScreen"]
+[node name="Map" type="Control" parent="Control/PauseScreen"]
 anchors_preset = 0
 offset_left = 152.0
 offset_top = 8.0
 offset_right = 472.0
 offset_bottom = 192.0
 
-[node name="ColorRect" type="ColorRect" parent="PauseScreen/Map"]
+[node name="ColorRect" type="ColorRect" parent="Control/PauseScreen/Map"]
 modulate = Color(3.0114884, 3.062586, 4.62106, 1)
 z_index = -1
 layout_mode = 1
@@ -130,17 +130,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MapNode" parent="PauseScreen/Map" instance=ExtResource("2_bwi2f")]
+[node name="MapNode" parent="Control/PauseScreen/Map" instance=ExtResource("2_bwi2f")]
 modulate = Color(0.23222783, 0.58825254, 0.28502172, 1)
 layout_mode = 0
 offset_left = 56.0
-offset_top = 56.0
+offset_top = 57.0
 offset_right = 92.0
-offset_bottom = 65.0
+offset_bottom = 66.0
 linkedscene = "uid://ci7ccefelmweo"
 entrance_right = Array[float]([2.0])
 
-[node name="MapNode2" parent="PauseScreen/Map" instance=ExtResource("2_bwi2f")]
+[node name="MapNode2" parent="Control/PauseScreen/Map" instance=ExtResource("2_bwi2f")]
 modulate = Color(0.23222783, 0.58825254, 0.28502172, 1)
 layout_mode = 0
 offset_left = 93.0
@@ -148,68 +148,81 @@ offset_top = 33.0
 offset_right = 116.0
 offset_bottom = 66.0
 linkedscene = "uid://bxeftv3hdojwp"
+entrance_right = Array[float]([11.7])
+entrance_left = Array[float]([26.2, 2.1999998, 12.6])
 
-[node name="MapNode3" parent="PauseScreen/Map" instance=ExtResource("2_bwi2f")]
+[node name="MapNode3" parent="Control/PauseScreen/Map" instance=ExtResource("2_bwi2f")]
 modulate = Color(0.23222783, 0.58825254, 0.28502172, 1)
 layout_mode = 0
 offset_left = 117.0
-offset_top = 37.0
+offset_top = 43.0
 offset_right = 143.0
-offset_bottom = 44.0
+offset_bottom = 50.0
 linkedscene = "uid://c8gmvxta88vqt"
 entrance_bottom = Array[float]([12.6])
 entrance_left = Array[float]([2.0])
 
-[node name="MapNode4" parent="PauseScreen/Map" instance=ExtResource("2_bwi2f")]
+[node name="MapNode4" parent="Control/PauseScreen/Map" instance=ExtResource("2_bwi2f")]
 modulate = Color(0.23222783, 0.58825254, 0.28502172, 1)
 layout_mode = 0
 offset_left = 66.0
-offset_top = 33.0
+offset_top = 32.0
 offset_right = 92.0
-offset_bottom = 41.0
+offset_bottom = 40.0
 linkedscene = "uid://cni8y1vqkjdg6"
 entrance_right = Array[float]([3.0])
 
-[node name="MapNode5" parent="PauseScreen/Map" instance=ExtResource("2_bwi2f")]
+[node name="MapNode5" parent="Control/PauseScreen/Map" instance=ExtResource("2_bwi2f")]
 modulate = Color(0.98199487, 0.38766775, 0.9739824, 1)
 layout_mode = 0
-offset_left = 117.0
-offset_top = 58.0
-offset_right = 129.0
-offset_bottom = 65.0
+offset_left = 80.0
+offset_top = 44.0
+offset_right = 92.0
+offset_bottom = 51.0
 linkedscene = "uid://bjdssrin5gtmt"
-entrance_left = Array[float]([2.0])
+entrance_right = Array[float]([2.0])
 
-[node name="MapNode6" parent="PauseScreen/Map" instance=ExtResource("2_bwi2f")]
-modulate = Color(0.23173092, 0.18489471, 0.52036595, 1)
+[node name="MapNode6" parent="Control/PauseScreen/Map" instance=ExtResource("2_bwi2f")]
+modulate = Color(0.29611, 0.20083857, 0.39138144, 1)
 layout_mode = 0
-offset_left = 126.0
-offset_top = 45.0
-offset_right = 140.0
-offset_bottom = 57.0
+offset_left = 128.0
+offset_top = 51.0
+offset_right = 152.0
+offset_bottom = 58.0
 linkedscene = "uid://c7k1mg2cgsk88"
-entrance_top = Array[float]([4.0])
+entrance_top = Array[float]([2.0])
+entrance_bottom = Array[float]([16.8])
 
-[node name="PlayerIndicator" type="Control" parent="PauseScreen/Map"]
+[node name="MapNode7" parent="Control/PauseScreen/Map" instance=ExtResource("2_bwi2f")]
+modulate = Color(0.29611, 0.20083857, 0.39138144, 1)
+layout_mode = 0
+offset_left = 143.0
+offset_top = 59.0
+offset_right = 158.0
+offset_bottom = 75.0
+linkedscene = "uid://bwfo3fano2fhp"
+entrance_top = Array[float]([2.0])
+entrance_left = Array[float]([11.0])
+
+[node name="PlayerIndicator" type="Control" parent="Control/PauseScreen/Map"]
 unique_name_in_owner = true
-layout_mode = 1
 anchors_preset = 0
 
-[node name="TextureRect" type="TextureRect" parent="PauseScreen/Map/PlayerIndicator"]
+[node name="TextureRect" type="TextureRect" parent="Control/PauseScreen/Map/PlayerIndicator"]
 layout_mode = 0
 offset_left = 56.0
-offset_top = 58.0
+offset_top = 60.0
 offset_right = 62.0
-offset_bottom = 64.0
+offset_bottom = 66.0
 texture = SubResource("GradientTexture2D_b0dtj")
 
-[node name="AnimationTree" type="AnimationPlayer" parent="PauseScreen/Map/PlayerIndicator"]
+[node name="AnimationTree" type="AnimationPlayer" parent="Control/PauseScreen/Map/PlayerIndicator"]
 libraries = {
 &"": SubResource("AnimationLibrary_p1bgv")
 }
 autoplay = "blink"
 
-[node name="Abilities" type="Label" parent="PauseScreen"]
+[node name="Abilities" type="Label" parent="Control/PauseScreen"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 12.0
@@ -217,7 +230,7 @@ offset_right = 67.0
 offset_bottom = 27.0
 text = "Abilities"
 
-[node name="Map2" type="Label" parent="PauseScreen"]
+[node name="Map2" type="Label" parent="Control/PauseScreen"]
 layout_mode = 0
 offset_left = 160.0
 offset_top = 12.0
@@ -225,7 +238,7 @@ offset_right = 190.0
 offset_bottom = 27.0
 text = "Map"
 
-[node name="SystemMenuButton" type="Button" parent="PauseScreen"]
+[node name="SystemMenuButton" type="Button" parent="Control/PauseScreen"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
