@@ -4,6 +4,7 @@ extends CanvasLayer
 @onready var main_menu: VBoxContainer = %MainMenu
 @onready var new_game_menu: VBoxContainer = %NewGameMenu
 @onready var load_game_menu: VBoxContainer = %LoadGameMenu
+@onready var system_menu: VBoxContainer = %SystemMenu
 
 @onready var new_game: Button = %NewGame
 @onready var load_game: Button = %LoadGame
@@ -16,6 +17,9 @@ extends CanvasLayer
 @onready var load_slot_02: Button = %LoadSlot02
 @onready var load_slot_03: Button = %LoadSlot03
 
+@onready var options: Button = %Options
+@onready var backto_title_button: Button = %backtoTitleButton
+
 @onready var animation_player: AnimationPlayer = $Control/MainMenu/Logo/AnimationPlayer
 #endregion
 
@@ -25,6 +29,7 @@ func _ready() -> void:
 	#connect button signals
 	new_game.pressed.connect(show_new_game_menu)
 	load_game.pressed.connect(show_load_menu)
+	options.pressed.connect(show_system_menu)
 	
 	#connect new game button
 	new_slot_01.pressed.connect(on_new_game_pressed.bind(0))
@@ -37,6 +42,8 @@ func _ready() -> void:
 	load_slot_03.pressed.connect(on_load_game_pressed.bind(2)) 
 	
 	#connect audio
+	Audio.setup_audio_buttons(self)
+	Audio.play_music(preload("uid://b0dbdlkmpdu72"))
 	#setup main menu
 	#transition logo 
 	pass
@@ -46,6 +53,7 @@ func show_main_menu() -> void :
 	main_menu.visible = true
 	new_game_menu.visible = false 
 	load_game_menu.visible = false
+	system_menu.visible = false
 	new_game.grab_focus()
 	pass
 
@@ -53,6 +61,8 @@ func show_new_game_menu() -> void :
 	main_menu.visible = false
 	new_game_menu.visible = true 
 	load_game_menu.visible = false
+	system_menu.visible = false
+	
 	new_slot_01.grab_focus()
 	
 	if SaveManager.check_if_file_exists(0) : 
@@ -70,6 +80,7 @@ func show_load_menu() -> void :
 	main_menu.visible = false
 	new_game_menu.visible = false 
 	load_game_menu.visible = true
+	system_menu.visible = false
 	load_slot_01.grab_focus()
 	
 	#load slot will be disabled if there are no saved files
@@ -77,7 +88,16 @@ func show_load_menu() -> void :
 	load_slot_02.disabled = not SaveManager.check_if_file_exists(1)
 	load_slot_03.disabled = not SaveManager.check_if_file_exists(2)
 	pass
+
+func show_system_menu() -> void :
+	main_menu.visible = false
+	new_game_menu.visible = false 
+	load_game_menu.visible = false
+	system_menu.visible = true
+	backto_title_button.grab_focus()
+	backto_title_button.pressed.connect(on_back_to_title_button_pressed)
 	
+	pass
 func on_animation_finished( anim : String) -> void :
 	if anim == "game_intro" :
 		animation_player.play("game_title_loop")
@@ -97,3 +117,9 @@ func on_new_game_pressed(slot : int) -> void:
 func on_load_game_pressed(slot : int) -> void:
 	SaveManager.load_game(slot)
 	pass
+
+func on_back_to_title_button_pressed() -> void :
+	show_main_menu()
+
+
+#to do music sliders here

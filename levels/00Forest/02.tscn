@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://bxeftv3hdojwp"]
+[gd_scene load_steps=23 format=4 uid="uid://bxeftv3hdojwp"]
 
 [ext_resource type="Script" uid="uid://b8r2sphs8h8st" path="res://general/scripts/level_bounds.gd" id="1_k15jj"]
 [ext_resource type="TileSet" uid="uid://3jgekgndmfkp" path="res://levels/TileSets/forest.tres" id="1_ps7ni"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://4hpsx3nexej8" path="res://general/leveltransition/level_transition.tscn" id="3_wv3f0"]
 [ext_resource type="Material" uid="uid://bbr2nmqdf8ygu" path="res://materials_and_shaders/fog_fade_material.tres" id="4_bad3b"]
 [ext_resource type="PackedScene" uid="uid://byque4w54oowj" path="res://player/player.tscn" id="5_p53cw"]
+[ext_resource type="Script" uid="uid://bwpc3haaurpfo" path="res://global/Audio/music/musictrigger.gd" id="7_ejvff"]
+[ext_resource type="AudioStream" uid="uid://ctydtsnogiogi" path="res://global/Audio/music/Town.ogg" id="8_30e7u"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bad3b"]
 blend_mode = 1
@@ -368,3 +370,9 @@ position = Vector2(928, 384)
 size = 5
 location = 1
 target_level = "uid://c8gmvxta88vqt"
+
+[node name="MusicTrigger" type="Node" parent="."]
+script = ExtResource("7_ejvff")
+track = ExtResource("8_30e7u")
+reverb = 1
+metadata/_custom_type_script = "uid://bwpc3haaurpfo"

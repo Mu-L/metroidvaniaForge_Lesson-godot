@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://bjdssrin5gtmt"]
+[gd_scene load_steps=8 format=4 uid="uid://bjdssrin5gtmt"]
 
 [ext_resource type="TileSet" uid="uid://3jgekgndmfkp" path="res://levels/TileSets/forest.tres" id="1_pl5s1"]
 [ext_resource type="PackedScene" uid="uid://4tht7undomt" path="res://levels/Props/torch.tscn" id="2_2aiqg"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://4hpsx3nexej8" path="res://general/leveltransition/level_transition.tscn" id="4_nxn70"]
 [ext_resource type="PackedScene" uid="uid://dsmltskakqav5" path="res://general/save_point/save_point.tscn" id="6_3hxu5"]
 [ext_resource type="PackedScene" uid="uid://byy8ghkrl3til" path="res://general/player_spawn/player_spawn.tscn" id="6_o653d"]
+[ext_resource type="Script" uid="uid://bwpc3haaurpfo" path="res://global/Audio/music/musictrigger.gd" id="7_gdg7j"]
 
 [node name="05" type="Node2D"]
 
@@ -43,3 +44,8 @@ position = Vector2(0, 248)
 size = 6
 target_level = "uid://bxeftv3hdojwp"
 target_area_name = "LevelTransition2"
+
+[node name="MusicTrigger" type="Node" parent="."]
+script = ExtResource("7_gdg7j")
+reverb = 1
+metadata/_custom_type_script = "uid://bwpc3haaurpfo"

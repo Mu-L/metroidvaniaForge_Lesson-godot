@@ -3,15 +3,21 @@ extends CharacterBody2D
 
 const DEBUGGER = preload("uid://db0arhrb4qi4x")
 
+
 #region /// onready variables
 
-@onready var player_sprite: Sprite2D = $Sprite2D
+@onready var sprite_2d: Sprite2D = %Sprite2D
+@onready var attack_sprite_2d: Sprite2D = %AttackSprite2D
+
 @onready var collision_stand: CollisionShape2D = $CollisionStand
 @onready var collision_crouch: CollisionShape2D = $CollisionCrouch
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 @onready var drop_down_shape_cast: ShapeCast2D = %DropDownShapeCast
 @onready var point_light_2d: PointLight2D = %PointLight2D
 @onready var cur_hp: Label = $Debugger/curHp
+
+@onready var attack_area: AttackArea = $AttackArea
+
 
 
 #endregion
@@ -35,6 +41,8 @@ const DEBUGGER = preload("uid://db0arhrb4qi4x")
 @export var movespeed : float = 150
 @export var maxfallspeed : float = 600
 
+@export var dashTimeCooldown : float = 0.1
+@export var attackTimerCooldown : float = 0.2
 #endregion
 
 #region /// state machine variables 
@@ -87,6 +95,9 @@ func _physics_process(_delta: float) -> void:
 	pass
 
 func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_released("jump") and velocity.y < 0 :
+		velocity.y *= 0.5
+	
 	if event.is_action_pressed("action"):
 		Messages.player_interacted.emit(self)
 	
@@ -153,10 +164,18 @@ func update_direction() -> void :
 	direction = Vector2(x_axis,y_axis)
 	
 	if prev_direction.x != direction.x :
+		attack_area.flipattack(direction.x)
+		
 		if direction.x < 0 :
-			player_sprite.flip_h = true
+			#left
+			sprite_2d.flip_h = true
+			attack_sprite_2d.flip_h = true
+			attack_sprite_2d.position.x = -32
 		elif direction.x > 0 :
-			player_sprite.flip_h = false
+			#right
+			sprite_2d.flip_h = false
+			attack_sprite_2d.flip_h = false
+			attack_sprite_2d.position.x = 32
 	pass
 
 func enable_point_light_2d(value : bool) -> void :

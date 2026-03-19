@@ -1,4 +1,4 @@
-@icon("res://general/icons/door.svg")
+@icon("res://general/icons/switch.svg")
 class_name DoorSwitch
 extends Node2D
 
@@ -29,8 +29,7 @@ func on_player_exited(_n : Node2D) -> void :
 	pass
 	
 func on_player_interacted(_player :Player) -> void :
-	#audio
-	#persistent data
+	Audio.play_spatial_soundfx(DOOR_SWITCH_AUDIO,global_position)
 	SaveManager.persistent_data[ set_unique_name() ] = "open"
 	activated.emit()
 	set_open()

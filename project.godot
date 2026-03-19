@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="New Game Project"
-run/main_scene="uid://bpj6xhviyw3tn"
+run/main_scene="uid://bi3krjsipmw2b"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://icon.svg"
+
+[audio]
+
+buses/default_bus_layout="uid://b8wr0hwoqop4v"
 
 [autoload]
 
@@ -21,6 +25,8 @@ SceneManager="*res://global/scene_manager/scene_manager.tscn"
 SaveManager="*res://global/save_manager.gd"
 Messages="*res://global/messages.gd"
 PlayerHud="*res://UI/PlayerHUD/PlayerHUD.tscn"
+Audio="*res://global/Audio/Audio.tscn"
+Visualfx="*res://global/VisualFX/visualfx.gd"
 
 [display]
 
@@ -115,6 +121,9 @@ pause={
 2d_physics/layer_1="ground"
 2d_physics/layer_2="one way platform"
 2d_physics/layer_5="Player"
+2d_physics/layer_6="Enemy"
+2d_physics/layer_7="Breakable"
+2d_physics/layer_8="SlamBreakable"
 
 [rendering]
 

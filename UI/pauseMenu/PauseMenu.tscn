@@ -115,7 +115,7 @@ grow_vertical = 2
 
 [node name="Map" type="Control" parent="Control/PauseScreen"]
 anchors_preset = 0
-offset_left = 152.0
+offset_left = 80.0
 offset_top = 8.0
 offset_right = 472.0
 offset_bottom = 192.0
@@ -273,10 +273,10 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "System"
 
-[node name="SystemScreen" type="Control" parent="."]
+[node name="SystemScreen" type="Control" parent="Control"]
 unique_name_in_owner = true
 visible = false
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -284,7 +284,20 @@ offset_top = 32.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SystemScreen"]
+[node name="ColorRect" type="ColorRect" parent="Control/SystemScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = 16.0
+offset_right = -40.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2604114, 0.27757123, 0.31670618, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/SystemScreen"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -295,35 +308,39 @@ offset_right = 144.0
 offset_bottom = 195.0
 grow_horizontal = 2
 theme_override_constants/separation = 20
+alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SystemScreen/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/SystemScreen/VBoxContainer"]
 layout_mode = 2
 
-[node name="backtoMapButton" type="Button" parent="SystemScreen/VBoxContainer/HBoxContainer"]
+[node name="backtoMapButton" type="Button" parent="Control/SystemScreen/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Back to Map"
 
-[node name="backtoTitleButton" type="Button" parent="SystemScreen/VBoxContainer/HBoxContainer"]
+[node name="backtoTitleButton" type="Button" parent="Control/SystemScreen/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Back to Title"
 
-[node name="Label" type="Label" parent="SystemScreen/VBoxContainer"]
+[node name="Label" type="Label" parent="Control/SystemScreen/VBoxContainer"]
 layout_mode = 2
 text = "Audio Levels"
+horizontal_alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="SystemScreen/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/SystemScreen/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 4
 
-[node name="Label" type="Label" parent="SystemScreen/VBoxContainer/HBoxContainer2"]
+[node name="Label" type="Label" parent="Control/SystemScreen/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 text = "Music"
 
-[node name="MusicSlider" type="HSlider" parent="SystemScreen/VBoxContainer/HBoxContainer2"]
+[node name="MusicSlider" type="HSlider" parent="Control/SystemScreen/VBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -331,15 +348,16 @@ max_value = 1.0
 step = 0.05
 value = 0.5
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="SystemScreen/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="Control/SystemScreen/VBoxContainer"]
 layout_mode = 2
+alignment = 1
 
-[node name="Label" type="Label" parent="SystemScreen/VBoxContainer/HBoxContainer3"]
+[node name="Label" type="Label" parent="Control/SystemScreen/VBoxContainer/HBoxContainer3"]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 text = "SoundFx"
 
-[node name="SoundFx" type="HSlider" parent="SystemScreen/VBoxContainer/HBoxContainer3"]
+[node name="SoundFx" type="HSlider" parent="Control/SystemScreen/VBoxContainer/HBoxContainer3"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -347,15 +365,16 @@ max_value = 1.0
 step = 0.05
 value = 0.5
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="SystemScreen/VBoxContainer"]
+[node name="HBoxContainer4" type="HBoxContainer" parent="Control/SystemScreen/VBoxContainer"]
 layout_mode = 2
+alignment = 1
 
-[node name="Label" type="Label" parent="SystemScreen/VBoxContainer/HBoxContainer4"]
+[node name="Label" type="Label" parent="Control/SystemScreen/VBoxContainer/HBoxContainer4"]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 text = "UI"
 
-[node name="UISlider" type="HSlider" parent="SystemScreen/VBoxContainer/HBoxContainer4"]
+[node name="UISlider" type="HSlider" parent="Control/SystemScreen/VBoxContainer/HBoxContainer4"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3

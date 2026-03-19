@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://bwfo3fano2fhp"]
+[gd_scene load_steps=10 format=4 uid="uid://bwfo3fano2fhp"]
 
 [ext_resource type="Script" uid="uid://b8r2sphs8h8st" path="res://general/scripts/level_bounds.gd" id="1_u0fto"]
 [ext_resource type="TileSet" uid="uid://3jgekgndmfkp" path="res://levels/TileSets/forest.tres" id="2_545qb"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://4hpsx3nexej8" path="res://general/leveltransition/level_transition.tscn" id="4_545qb"]
 [ext_resource type="PackedScene" uid="uid://byy8ghkrl3til" path="res://general/player_spawn/player_spawn.tscn" id="6_vnrxo"]
 [ext_resource type="PackedScene" uid="uid://dl64p8avd83d8" path="res://general/Doors/doorSwitch.tscn" id="7_1d38n"]
+[ext_resource type="Script" uid="uid://bwpc3haaurpfo" path="res://global/Audio/music/musictrigger.gd" id="8_hmtyi"]
+[ext_resource type="AudioStream" uid="uid://w5vq3npneekd" path="res://global/Audio/music/dungeon_01.ogg" id="9_mpeud"]
 
 [node name="07" type="Node2D"]
 
@@ -138,3 +140,9 @@ position = Vector2(112, 607)
 
 [node name="DoorSwitch" parent="Door0701" instance=ExtResource("7_1d38n")]
 position = Vector2(72, 7)
+
+[node name="MusicTrigger" type="Node" parent="."]
+script = ExtResource("8_hmtyi")
+track = ExtResource("9_mpeud")
+reverb = 1
+metadata/_custom_type_script = "uid://bwpc3haaurpfo"

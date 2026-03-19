@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="HitParticlesSettings" load_steps=4 format=3 uid="uid://cc7sjppxegcuo"]
+
+[ext_resource type="Script" uid="uid://8ankca1drt7g" path="res://global/VisualFX/hitparticlesettings.gd" id="1_3tumg"]
+[ext_resource type="Texture2D" uid="uid://cnb62ase5g22a" path="res://levels/TileSets/Sprites/forgotten_forest_example_tileset.png" id="2_0bkhd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tob7r"]
+atlas = ExtResource("2_0bkhd")
+region = Rect2(747.6953, 138.56752, 5.503601, 6.082947)
+
+[resource]
+script = ExtResource("1_3tumg")
+count = 15
+texture = SubResource("AtlasTexture_tob7r")
+metadata/_custom_type_script = "uid://8ankca1drt7g"

@@ -5,6 +5,7 @@ class_name PlayerStateFall
 @export var coyoteTime: float = 0.125
 @export var jumpBufferTime : float = 0.22
 
+const LANDDOWNSFX = preload("uid://crjm0tnon3w0a")
 
 var coyoteTimer : float = 0
 var bufferTimer : float = 0
@@ -18,7 +19,7 @@ func enter() -> void:
 	player.animation_player.pause()
 	
 	player.gravity_multiplier = fall_gravity_multiplier #increases gravity fall velocity during fall
-	if player.previous_state == jump :
+	if player.previous_state == jump || player.previous_state == attack :
 		coyoteTimer = 0
 	else :
 		coyoteTimer = coyoteTime
@@ -28,9 +29,14 @@ func exit() -> void:
 	
 	bufferTimer = 0
 	player.gravity_multiplier = 1.0 # reset gravity to default
+	
+ 
 	pass
 
 func handle_input( event : InputEvent ) -> PlayerState :
+	if event.is_action_pressed("attack"):
+		return attack
+		
 	if event.is_action_pressed("jump"):
 		if coyoteTimer > 0:
 			return jump
@@ -39,6 +45,9 @@ func handle_input( event : InputEvent ) -> PlayerState :
 			return jump
 		else :
 			bufferTimer = jumpBufferTime
+	if event.is_action_pressed("dash"):
+		return dash
+		
 	return next_state
 
 func process(delta: float) -> PlayerState:
@@ -50,10 +59,12 @@ func process(delta: float) -> PlayerState:
 func physics_process(_delta: float) -> PlayerState:
 	if player.is_on_floor():
 		playerHasDoubleJumped = false
+		Visualfx.create_land_dust_fx(player.global_position)
 		#player.add_debugger(Color.DARK_BLUE)
+		Audio.play_spatial_soundfx(LANDDOWNSFX ,player.global_position , -3 , -11)
 		if bufferTimer > 0 :
-			print("JUMP BUFFER TRIGGERED!")
 			return jump
+		
 		return idle
 	player.velocity.x = player.direction.x * player.movespeed
 	return next_state
@@ -62,3 +73,5 @@ func set_fall_frame() -> void:
 	var frame : float = remap(player.velocity.y ,0.0,player.maxfallspeed,0.5,1.0)
 	player.animation_player.seek( frame , true )
 	pass
+
+ 

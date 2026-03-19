@@ -24,6 +24,9 @@ func exit() -> void:
 	pass
 
 func handle_input( _event : InputEvent ) -> PlayerState :
+	if _event.is_action_pressed("attack"):
+		return attack
+		
 	if _event.is_action_released("jump"):
 		player.drop_down_shape_cast.force_shapecast_update()
 		if player.drop_down_shape_cast.is_colliding():

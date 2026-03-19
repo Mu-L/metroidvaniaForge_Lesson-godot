@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://bka60wfnkm4rk"]
+
+[ext_resource type="Script" uid="uid://dbtpma31b3x4b" path="res://general/scripts/breakables.gd" id="1_ctt4w"]
+[ext_resource type="Script" uid="uid://8ankca1drt7g" path="res://global/VisualFX/hitparticlesettings.gd" id="2_0dey8"]
+[ext_resource type="Resource" uid="uid://dyddftd5jckww" path="res://global/VisualFX/hitparticle_settings/hit_particles_wood_medium.tres" id="3_pnsid"]
+[ext_resource type="Texture2D" uid="uid://sl712qmp8lao" path="res://general/sprites/props_destructible.png" id="4_2qjd8"]
+[ext_resource type="Script" uid="uid://cmtvwnsxcioy8" path="res://general/scripts/damagearea.gd" id="5_q250s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ckra4"]
+size = Vector2(32, 32.375)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ctt4w"]
+size = Vector2(38, 31)
+
+[node name="Breakable" type="Node2D"]
+script = ExtResource("1_ctt4w")
+fixed_hit_count = true
+hit_particles = Array[ExtResource("2_0dey8")]([ExtResource("3_pnsid")])
+metadata/_custom_type_script = "uid://dbtpma31b3x4b"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("4_2qjd8")
+region_enabled = true
+region_rect = Rect2(52.781113, 28.145088, 39.410423, 35.062267)
+
+[node name="DamageArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 64
+collision_mask = 0
+script = ExtResource("5_q250s")
+metadata/_custom_type_script = "uid://cmtvwnsxcioy8"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+shape = SubResource("RectangleShape2D_ckra4")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 64
+collision_mask = 17
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_ctt4w")

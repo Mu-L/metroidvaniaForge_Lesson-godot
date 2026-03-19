@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://cni8y1vqkjdg6"]
+[gd_scene load_steps=30 format=4 uid="uid://cni8y1vqkjdg6"]
 
 [ext_resource type="Script" uid="uid://b8r2sphs8h8st" path="res://general/scripts/level_bounds.gd" id="1_mse3s"]
 [ext_resource type="TileSet" uid="uid://3jgekgndmfkp" path="res://levels/TileSets/forest.tres" id="2_e3pwa"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://4hpsx3nexej8" path="res://general/leveltransition/level_transition.tscn" id="6_isurk"]
 [ext_resource type="PackedScene" uid="uid://byque4w54oowj" path="res://player/player.tscn" id="7_m4jse"]
 [ext_resource type="Texture2D" uid="uid://ddmwkimq3olh" path="res://myCharacter/MMakiling_Idle.png" id="8_e3pwa"]
+[ext_resource type="Script" uid="uid://bwpc3haaurpfo" path="res://global/Audio/music/musictrigger.gd" id="10_0sg3m"]
+[ext_resource type="AudioStream" uid="uid://ctydtsnogiogi" path="res://global/Audio/music/Town.ogg" id="11_isurk"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_t2qlm"]
 blend_mode = 1
@@ -126,7 +128,7 @@ _data = {
 &"idlegg": SubResource("Animation_oy8yw")
 }
 
-[node name="03" type="Node2D"]
+[node name="04" type="Node2D"]
 
 [node name="LevelBounds" type="Node2D" parent="."]
 z_index = 256
@@ -407,3 +409,10 @@ scale = Vector2(1.4, 1.4)
 texture = ExtResource("8_e3pwa")
 flip_h = true
 hframes = 8
+
+[node name="MusicTrigger" type="Node" parent="."]
+script = ExtResource("10_0sg3m")
+track = ExtResource("11_isurk")
+reverb = 1
+volumeoverride = 3.0
+metadata/_custom_type_script = "uid://bwpc3haaurpfo"

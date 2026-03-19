@@ -1,6 +1,7 @@
 #save manager script
 extends Node
 
+const CONFIG_FILE_PATH = "user://settings.cfg"
 const SLOTS : Array [String] = [
 	"save_01","save_02","save_03"
 ]
@@ -13,6 +14,7 @@ var persistent_data : Dictionary = {} #data for storing doors, chests , etc..
 
 
 func _ready() -> void:
+	load_configuration()
 	SceneManager.scene_entered.connect(on_scene_entered)
 	pass
 
@@ -110,8 +112,7 @@ func load_player_stats() -> void :
 
 func get_filename(slot : int) -> String :
 	return "user://" + SLOTS[slot] + ".sav"
-
-
+	
 func check_if_file_exists( slot : int) -> bool :
 	return FileAccess.file_exists( get_filename( slot ))
 
@@ -125,3 +126,26 @@ func on_scene_entered(scene_uid : String)-> void :
 		discovered_areas.append(scene_uid)
 	pass
 	
+func save_configuration()->void:
+	var config := ConfigFile.new()
+	config.set_value("audio","music" , AudioServer.get_bus_volume_linear(2))
+	config.set_value("audio","sfx" , AudioServer.get_bus_volume_linear(3))
+	config.set_value("audio","ui" , AudioServer.get_bus_volume_linear(4))
+	config.save(CONFIG_FILE_PATH)
+	pass
+
+func load_configuration()->void:
+	var config := ConfigFile.new()
+	var err = config.load(CONFIG_FILE_PATH)
+	if err != OK :
+		AudioServer.set_bus_volume_linear(2,0.7)
+		AudioServer.set_bus_volume_linear(3,1)
+		AudioServer.set_bus_volume_linear(4,1)
+		save_configuration()
+		return
+	AudioServer.set_bus_volume_linear(2,config.get_value("audio","music",0.7))
+	AudioServer.set_bus_volume_linear(3,config.get_value("audio","sfx",0.7))
+	AudioServer.set_bus_volume_linear(4,config.get_value("audio","uiic",0.7))
+	
+
+	pass

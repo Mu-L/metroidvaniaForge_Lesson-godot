@@ -1,15 +1,20 @@
-[gd_scene load_steps=24 format=3 uid="uid://byque4w54oowj"]
+[gd_scene load_steps=32 format=3 uid="uid://byque4w54oowj"]
 
 [ext_resource type="Script" uid="uid://c6ba85agjfcwg" path="res://player/scripts/player.gd" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://c0t5d6flu5w2w" path="res://player/states/idle.gd" id="2_g1dw6"]
 [ext_resource type="Script" uid="uid://ujeb6tmqmmsd" path="res://player/states/run.gd" id="3_yw30f"]
+[ext_resource type="Script" uid="uid://bq7jffpi168v7" path="res://player/states/dash.gd" id="4_2ieo8"]
 [ext_resource type="Script" uid="uid://drf5spf77hgfb" path="res://player/states/jump.gd" id="4_yw30f"]
 [ext_resource type="Script" uid="uid://b7hvk0omer03f" path="res://player/states/fall.gd" id="5_qjkh3"]
 [ext_resource type="Script" uid="uid://pyre1qdar6be" path="res://player/states/crouch.gd" id="6_g6k8r"]
 [ext_resource type="Texture2D" uid="uid://hbhcrlyfrpum" path="res://player/sprites/hero.png" id="7_boad6"]
+[ext_resource type="Script" uid="uid://dsap5lhuismdd" path="res://player/states/attack.gd" id="8_kb6p2"]
 [ext_resource type="FontFile" uid="uid://b6k1twkuv26kx" path="res://general/fonts/alagard.ttf" id="8_rgyib"]
 [ext_resource type="Script" uid="uid://b5mbfoauqrcy" path="res://player/scripts/in_game_hints.gd" id="9_8t03j"]
+[ext_resource type="Script" uid="uid://cy3w8bf8n23tu" path="res://player/scripts/playercamera.gd" id="9_ebec5"]
 [ext_resource type="Texture2D" uid="uid://muys5ulieods" path="res://player/sprites/input_icons.png" id="9_hg6s5"]
+[ext_resource type="Texture2D" uid="uid://e50yq0do8a2l" path="res://player/sprites/weapon_smears.png" id="10_wodsf"]
+[ext_resource type="Script" uid="uid://crxnp7t2mcd67" path="res://general/scripts/attackarea.gd" id="13_yllr7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_boad6"]
 radius = 8.0
@@ -46,6 +51,148 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D/AttackSprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D/AttackSprite2D:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D/AttackSprite2D:show_behind_parent")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_kb6p2"]
+resource_name = "attack1"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [31, 32, 33]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/AttackSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D/AttackSprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D/AttackSprite2D:show_behind_parent")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_wodsf"]
+resource_name = "attack2"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [34, 35, 36]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/AttackSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D/AttackSprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D/AttackSprite2D:show_behind_parent")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, false]
 }
 
 [sub_resource type="Animation" id="Animation_hg6s5"]
@@ -152,6 +299,8 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rgyib"]
 _data = {
 &"RESET": SubResource("Animation_ebec5"),
+&"attack1": SubResource("Animation_kb6p2"),
+&"attack2": SubResource("Animation_wodsf"),
 &"crouch": SubResource("Animation_hg6s5"),
 &"fall": SubResource("Animation_2ieo8"),
 &"idle": SubResource("Animation_boad6"),
@@ -171,10 +320,13 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(1, 0.5)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wodsf"]
+size = Vector2(64, 19)
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 z_index = 2
 collision_layer = 16
-collision_mask = 3
+collision_mask = 67
 floor_snap_length = 2.0
 script = ExtResource("1_oul6g")
 light_source_energy = 1.0
@@ -185,9 +337,17 @@ light_source_energy = 1.0
 unique_name_in_owner = true
 script = ExtResource("2_g1dw6")
 
+[node name="Attack" type="Node" parent="States"]
+unique_name_in_owner = true
+script = ExtResource("8_kb6p2")
+
 [node name="Run" type="Node" parent="States"]
 unique_name_in_owner = true
 script = ExtResource("3_yw30f")
+
+[node name="Dash" type="Node" parent="States"]
+unique_name_in_owner = true
+script = ExtResource("4_2ieo8")
 
 [node name="Jump" type="Node" parent="States"]
 unique_name_in_owner = true
@@ -203,17 +363,26 @@ unique_name_in_owner = true
 script = ExtResource("6_g6k8r")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(0, -39)
 texture = ExtResource("7_boad6")
 hframes = 16
 vframes = 4
 
+[node name="AttackSprite2D" type="Sprite2D" parent="Sprite2D"]
+unique_name_in_owner = true
+position = Vector2(22, 22)
+texture = ExtResource("10_wodsf")
+hframes = 8
+
 [node name="CollisionStand" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -23)
 shape = SubResource("CapsuleShape2D_boad6")
 debug_color = Color(0, 0.6368282, 0.74452174, 0.41960785)
 
 [node name="CollisionCrouch" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -15)
 shape = SubResource("CapsuleShape2D_rgyib")
 disabled = true
@@ -248,18 +417,19 @@ libraries = {
 
 [node name="Camera2D" type="Camera2D" parent="."]
 process_mode = 3
+script = ExtResource("9_ebec5")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, -26)
+position = Vector2(15, -39)
 enabled = false
 color = Color(1, 0.77767587, 0.43423486, 1)
 texture = SubResource("GradientTexture2D_rgyib")
 
 [node name="Debugger" type="Node2D" parent="."]
-visible = false
 
 [node name="curHp" type="Label" parent="Debugger"]
+visible = false
 offset_left = -45.0
 offset_top = 6.0
 offset_right = 45.0
@@ -280,3 +450,17 @@ script = ExtResource("9_8t03j")
 [node name="Sprite2D" type="Sprite2D" parent="InGameHints"]
 texture = ExtResource("9_hg6s5")
 hframes = 16
+
+[node name="AttackArea" type="Area2D" parent="."]
+light_mask = 0
+visibility_layer = 96
+position = Vector2(0, -28)
+collision_layer = 0
+collision_mask = 96
+script = ExtResource("13_yllr7")
+metadata/_custom_type_script = "uid://crxnp7t2mcd67"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(32, 2.5)
+shape = SubResource("RectangleShape2D_wodsf")
+debug_color = Color(0.9480516, 0.08887396, 0, 0.41960785)

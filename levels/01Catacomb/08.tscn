@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://cd8wsqtv3c0g2"]
+[gd_scene load_steps=9 format=4 uid="uid://cd8wsqtv3c0g2"]
 
 [ext_resource type="Script" uid="uid://b8r2sphs8h8st" path="res://general/scripts/level_bounds.gd" id="1_px8dt"]
 [ext_resource type="TileSet" uid="uid://3jgekgndmfkp" path="res://levels/TileSets/forest.tres" id="2_iwd1s"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://4hpsx3nexej8" path="res://general/leveltransition/level_transition.tscn" id="4_iwd1s"]
 [ext_resource type="Texture2D" uid="uid://d2lmhix0saieh" path="res://myCharacter/supremo.png" id="4_qutmb"]
 [ext_resource type="PackedScene" uid="uid://byy8ghkrl3til" path="res://general/player_spawn/player_spawn.tscn" id="6_5hs77"]
+[ext_resource type="Script" uid="uid://bwpc3haaurpfo" path="res://global/Audio/music/musictrigger.gd" id="7_a11x6"]
+[ext_resource type="AudioStream" uid="uid://w5vq3npneekd" path="res://global/Audio/music/dungeon_01.ogg" id="8_rq1ki"]
 
 [node name="08" type="Node2D"]
 
@@ -135,3 +137,9 @@ target_area_name = "LevelTransition2"
 
 [node name="PlayerSpawn" parent="." instance=ExtResource("6_5hs77")]
 position = Vector2(80, 120)
+
+[node name="MusicTrigger" type="Node" parent="."]
+script = ExtResource("7_a11x6")
+track = ExtResource("8_rq1ki")
+reverb = 1
+metadata/_custom_type_script = "uid://bwpc3haaurpfo"

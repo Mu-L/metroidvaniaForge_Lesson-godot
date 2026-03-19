@@ -1,7 +1,6 @@
 class_name PauseMenu
 extends CanvasLayer
 
-var player : Player
 #region // onready variables 
 @onready var pause_screen: Control = %PauseScreen
 @onready var system_screen: Control = %SystemScreen
@@ -15,19 +14,25 @@ var player : Player
 
 #audio sliders
 @onready var music_slider: HSlider = %MusicSlider
-@onready var sound_fx: HSlider = %SoundFx
+@onready var sfx_slider: HSlider = %SoundFx
 @onready var ui_slider: HSlider = %UISlider
- 
+#var related to audio
+var player_pos : Vector2
 #endregion
 
 func _ready() -> void:
 	#grab player 
+	Audio.setup_audio_buttons(self)
 	show_pause_screen()
 	setup_system_screen()
+	var player : Node = get_tree().get_first_node_in_group("Player")
+	if player :
+		player_pos = player.global_position
 	#audio setup
 	#system menu
 	
 	system_menu_button.pressed.connect(show_system_screen)
+
 	pass
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -41,6 +46,15 @@ func _unhandled_input(event: InputEvent) -> void:
 	pass
 
 func setup_system_screen() -> void :
+	
+	music_slider.value = AudioServer.get_bus_volume_linear(2)
+	sfx_slider.value = AudioServer.get_bus_volume_linear(3)
+	ui_slider.value = AudioServer.get_bus_volume_linear(4)
+	
+	music_slider.value_changed.connect(on_music_slider_changed)
+	sfx_slider.value_changed.connect(on_sfx_slider_changed)
+	ui_slider.value_changed.connect(on_ui_slider_changed)
+	
 	backto_map_button.pressed.connect(show_pause_screen)
 	backto_title_button.pressed.connect(on_back_to_title_button_pressed)
 	pass
@@ -64,4 +78,20 @@ func on_back_to_title_button_pressed() -> void :
 	Messages.back_to_title.emit()
 	queue_free()
 	pass
+
+func on_music_slider_changed(v : float) -> void :
+	AudioServer.set_bus_volume_linear(2,v)
+	SaveManager.save_configuration()
+	pass
+
+func on_sfx_slider_changed(v : float) -> void :
+	AudioServer.set_bus_volume_linear(3,v)
+	Audio.play_spatial_soundfx(Audio.ui_focus_audio,player_pos)
+	SaveManager.save_configuration()
+	pass
 	
+func on_ui_slider_changed(v : float) -> void :
+	AudioServer.set_bus_volume_linear(4,v)
+	Audio.ui_focus_changed()
+	SaveManager.save_configuration()
+	pass

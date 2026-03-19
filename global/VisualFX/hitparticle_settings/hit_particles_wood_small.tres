@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="HitParticlesSettings" load_steps=4 format=3 uid="uid://cju4debmygdcu"]
+
+[ext_resource type="Script" uid="uid://8ankca1drt7g" path="res://global/VisualFX/hitparticlesettings.gd" id="1_jm2n8"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_j3v2f"]
+load_path = "res://.godot/imported/props_destructible.png-f1d05037d5d5fd1767d271e5f5cebf40.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4txbn"]
+atlas = SubResource("CompressedTexture2D_j3v2f")
+region = Rect2(120.98281, 6.9848256, 2.0261154, 2.0226521)
+
+[resource]
+script = ExtResource("1_jm2n8")
+count = 8
+texture = SubResource("AtlasTexture_4txbn")

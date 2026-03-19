@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=4 uid="uid://c7k1mg2cgsk88"]
+[gd_scene load_steps=7 format=4 uid="uid://c7k1mg2cgsk88"]
 
 [ext_resource type="Script" uid="uid://b8r2sphs8h8st" path="res://general/scripts/level_bounds.gd" id="1_3v2em"]
 [ext_resource type="TileSet" uid="uid://3jgekgndmfkp" path="res://levels/TileSets/forest.tres" id="2_jm8ui"]
 [ext_resource type="PackedScene" uid="uid://4hpsx3nexej8" path="res://general/leveltransition/level_transition.tscn" id="3_p5y0v"]
+[ext_resource type="Script" uid="uid://bwpc3haaurpfo" path="res://global/Audio/music/musictrigger.gd" id="5_3nmgm"]
 [ext_resource type="PackedScene" uid="uid://4tht7undomt" path="res://levels/Props/torch.tscn" id="5_thk28"]
+[ext_resource type="AudioStream" uid="uid://w5vq3npneekd" path="res://global/Audio/music/dungeon_01.ogg" id="6_injyc"]
 
 [node name="TemplateLevel" type="Node2D"]
 
@@ -121,3 +123,9 @@ target_level = "uid://bwfo3fano2fhp"
 
 [node name="Transitions" type="Node2D" parent="."]
 editor_description = "put level transition scene here"
+
+[node name="MusicTrigger" type="Node" parent="."]
+script = ExtResource("5_3nmgm")
+track = ExtResource("6_injyc")
+reverb = 1
+metadata/_custom_type_script = "uid://bwpc3haaurpfo"
