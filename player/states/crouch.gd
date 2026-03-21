@@ -11,6 +11,7 @@ func enter() -> void:
 	player.animation_player.play("crouch")
 	player.collision_stand.disabled = true
 	player.collision_crouch.disabled = false
+
 	player.drop_down_shape_cast.force_shapecast_update()
 	#player.player_sprite.scale.y = 0.625
 	#player.player_sprite.position.y = -15
@@ -19,6 +20,10 @@ func enter() -> void:
 func exit() -> void:
 	player.collision_stand.disabled = false
 	player.collision_crouch.disabled = true
+
+	player.damage_area_stand.disabled = false
+	player.damage_area_crouch.disabled = true
+	
 	#player.player_sprite.scale.y = 1.0
 	#player.player_sprite.position.y = -24
 	pass

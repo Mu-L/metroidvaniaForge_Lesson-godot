@@ -62,7 +62,6 @@ func show_new_game_menu() -> void :
 	new_game_menu.visible = true 
 	load_game_menu.visible = false
 	system_menu.visible = false
-	
 	new_slot_01.grab_focus()
 	
 	if SaveManager.check_if_file_exists(0) : 

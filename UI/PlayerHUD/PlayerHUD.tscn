@@ -77,6 +77,7 @@ texture_under = SubResource("GradientTexture2D_0hlwh")
 texture_progress = SubResource("GradientTexture2D_xd5q8")
 
 [node name="MPMargin" type="MarginContainer" parent="Control"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(40, 20)
 layout_mode = 0
 offset_left = 16.0
@@ -91,6 +92,7 @@ patch_margin_left = 24
 patch_margin_right = 5
 
 [node name="MPBar" type="TextureProgressBar" parent="Control/MPMargin/NinePatchRect"]
+unique_name_in_owner = true
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -106,3 +108,66 @@ value = 30.0
 nine_patch_stretch = true
 texture_under = SubResource("GradientTexture2D_oa7ru")
 texture_progress = SubResource("GradientTexture2D_nd67u")
+
+[node name="GameOver" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="GameOver"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5568628)
+
+[node name="Label" type="Label" parent="GameOver/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -146.0
+offset_top = -45.0
+offset_right = 146.0
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.93447423, 0.055483058, 0.055483058, 1)
+theme_override_font_sizes/font_size = 72
+text = "You Died"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GameOver"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -157.0
+offset_top = -48.0
+offset_right = 157.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 14
+
+[node name="LoadGame" type="Button" parent="GameOver/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Load Game"
+
+[node name="QuitButton" type="Button" parent="GameOver/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Quit"

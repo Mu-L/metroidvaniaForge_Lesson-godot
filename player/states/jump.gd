@@ -2,7 +2,6 @@ extends PlayerState
 class_name PlayerStateJump
 
 @export var jumpvelocity : float = 450
-const JUMPUPSFX =  preload("uid://d4js2fnwl34hw")
 #@export var jumpmovespeed : float = 150
 
 func init() -> void:
@@ -10,7 +9,7 @@ func init() -> void:
 	
 func enter() -> void:
 	Visualfx.create_jump_dust_fx(player.global_position)
-	Audio.play_spatial_soundfx(JUMPUPSFX ,player.global_position , -3 , -6)
+	player.jump_sfx.play()
 	player.animation_player.play("jump")
 	player.animation_player.pause()
 	

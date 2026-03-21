@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://bxeftv3hdojwp"]
+[gd_scene load_steps=24 format=4 uid="uid://bxeftv3hdojwp"]
 
 [ext_resource type="Script" uid="uid://b8r2sphs8h8st" path="res://general/scripts/level_bounds.gd" id="1_k15jj"]
 [ext_resource type="TileSet" uid="uid://3jgekgndmfkp" path="res://levels/TileSets/forest.tres" id="1_ps7ni"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://byque4w54oowj" path="res://player/player.tscn" id="5_p53cw"]
 [ext_resource type="Script" uid="uid://bwpc3haaurpfo" path="res://global/Audio/music/musictrigger.gd" id="7_ejvff"]
 [ext_resource type="AudioStream" uid="uid://ctydtsnogiogi" path="res://global/Audio/music/Town.ogg" id="8_30e7u"]
+[ext_resource type="PackedScene" uid="uid://bmppb2fyhi6hj" path="res://levels/Props/testDummy/spikedummy.tscn" id="9_30e7u"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bad3b"]
 blend_mode = 1
@@ -376,3 +377,6 @@ script = ExtResource("7_ejvff")
 track = ExtResource("8_30e7u")
 reverb = 1
 metadata/_custom_type_script = "uid://bwpc3haaurpfo"
+
+[node name="Spikedummy" parent="MusicTrigger" instance=ExtResource("9_30e7u")]
+position = Vector2(704, 997)

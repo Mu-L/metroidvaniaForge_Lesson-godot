@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://buonel7qknouj"
+path="res://.godot/imported/1-02. Freed From This Mortal Coil.ogg-de28c995f3dab3eba77f737ccff45531.oggvorbisstr"
+
+[deps]
+
+source_file="res://global/Audio/audio/1-02. Freed From This Mortal Coil.ogg"
+dest_files=["res://.godot/imported/1-02. Freed From This Mortal Coil.ogg-de28c995f3dab3eba77f737ccff45531.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

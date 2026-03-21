@@ -15,8 +15,11 @@ var next_state : PlayerState
 @onready var crouch: PlayerStateCrouch = %Crouch
 @onready var dash: DashState = %Dash
 @onready var attack: AttackState = %Attack
+@onready var hurt: PlayerHurtState = %Hurt
+@onready var death: DeathState = %Death
 
 #endregion
+
 
 func init() -> void:
 	pass

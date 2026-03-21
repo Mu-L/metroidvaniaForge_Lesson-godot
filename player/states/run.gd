@@ -61,7 +61,9 @@ func physics_process(_delta: float) -> PlayerState:
 func randomize_footstep_sfx() -> void :
 	if !foot_step_played :
 		var fs = FOOTSTEPS.pick_random()
-		Audio.play_spatial_soundfx(fs ,player.global_position , -3 , -6)
+		#Audio.play_spatial_soundfx(fs ,player.global_position , -3 , -6)
+		player.footstep_sfx.stream = fs
+		player.footstep_sfx.play()
 		foot_step_played = true
 	pass
 	

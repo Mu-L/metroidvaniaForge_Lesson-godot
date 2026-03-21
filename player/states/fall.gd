@@ -5,8 +5,6 @@ class_name PlayerStateFall
 @export var coyoteTime: float = 0.125
 @export var jumpBufferTime : float = 0.22
 
-const LANDDOWNSFX = preload("uid://crjm0tnon3w0a")
-
 var coyoteTimer : float = 0
 var bufferTimer : float = 0
 var playerHasDoubleJumped : bool = false
@@ -61,7 +59,8 @@ func physics_process(_delta: float) -> PlayerState:
 		playerHasDoubleJumped = false
 		Visualfx.create_land_dust_fx(player.global_position)
 		#player.add_debugger(Color.DARK_BLUE)
-		Audio.play_spatial_soundfx(LANDDOWNSFX ,player.global_position , -3 , -11)
+		#Audio.play_spatial_soundfx(LANDDOWNSFX ,player.global_position , -3 , -11)
+		player.land_sfx.play()
 		if bufferTimer > 0 :
 			return jump
 		

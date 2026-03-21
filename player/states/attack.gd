@@ -50,9 +50,13 @@ func AttackSequence() -> void :
 	if combocounter > 0 :
 		animname = "attack2"
 	
+	if player.previous_state == crouch :
+		animname = "attack_crouch1"
+	
 	player.animation_player.play(animname)
 	player.attack_area.active_area()
-	Audio.play_spatial_soundfx(SLASH_AUDIO , player.global_position , 0 ,5)
+	#Audio.play_spatial_soundfx(SLASH_AUDIO , player.global_position , 0 ,5)
+	player.attack_sfx.play()
 	pass
 
 func on_animation_finished(_a : String) -> void :
@@ -65,7 +69,10 @@ func end_attack()-> void :
 		AttackSequence()
 	else:
 		if player.is_on_floor():
-			next_state = idle
+			if player.previous_state == crouch :
+				next_state = crouch 
+			else :
+				next_state = idle
 		else :
 			next_state = fall
 	pass

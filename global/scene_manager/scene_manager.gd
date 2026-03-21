@@ -43,6 +43,7 @@ func transition_scene(new_scene : String , target_area_name : String , player_of
 	#fade new scene in
 	get_tree().paused = false
 	fade.visible = false
+
 	load_scene_finished.emit()
 	pass
 

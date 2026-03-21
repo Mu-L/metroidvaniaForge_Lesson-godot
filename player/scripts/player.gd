@@ -3,22 +3,36 @@ extends CharacterBody2D
 
 const DEBUGGER = preload("uid://db0arhrb4qi4x")
 
-
+#region /// signals
+signal damage_taken()
+#endregion
 #region /// onready variables
 
 @onready var sprite_2d: Sprite2D = %Sprite2D
 @onready var attack_sprite_2d: Sprite2D = %AttackSprite2D
+@onready var collision_stand: CollisionShape2D = %CollisionStand
+@onready var collision_crouch: CollisionShape2D = %CollisionCrouch
 
-@onready var collision_stand: CollisionShape2D = $CollisionStand
-@onready var collision_crouch: CollisionShape2D = $CollisionCrouch
+
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 @onready var drop_down_shape_cast: ShapeCast2D = %DropDownShapeCast
 @onready var point_light_2d: PointLight2D = %PointLight2D
 @onready var cur_hp: Label = $Debugger/curHp
+ 
+@onready var damage_area_stand: CollisionShape2D = %DamageAreaStand
+@onready var damage_area_crouch: CollisionShape2D = %DamageAreaCrouch
 
-@onready var attack_area: AttackArea = $AttackArea
+@onready var attack_area: AttackArea = %AttackArea
+@onready var damage_area: DamageArea = %DamageArea
 
+#region // audio
+@onready var hurt_sfx: AudioStreamPlayer2D = %HurtSFX
+@onready var jump_sfx: AudioStreamPlayer2D = %JumpSFX
+@onready var land_sfx: AudioStreamPlayer2D = %LandSFX
+@onready var attack_sfx: AudioStreamPlayer2D = %AttackSFX
+@onready var footstep_sfx: AudioStreamPlayer2D = %FootstepSFX
 
+#endregion
 
 #endregion
 #region /// export variables 
@@ -31,7 +45,17 @@ const DEBUGGER = preload("uid://db0arhrb4qi4x")
 	set( value ) :
 		player_max_hp = value
 		Messages.player_hp_changed.emit(player_hp, player_max_hp)
+
+@export var player_mp : float = 20 :
+	set( value ) :
+		player_mp = clampf(value, 0 , player_max_mp)
+		Messages.player_mp_changed.emit(player_mp, player_max_mp)
 		
+@export var player_max_mp : float = 20 :
+	set( value ) :
+		player_max_mp = value
+		Messages.player_mp_changed.emit(player_mp, player_max_mp)
+
 @export var double_jump : bool = false
 @export var dash_skill : bool = false
 @export var ground_slam : bool = false
@@ -67,6 +91,8 @@ var gravity_multiplier : float = 1.0
 func _ready() -> void:
 	#clear player if is already preset in node
 	point_light_2d.energy = light_source_energy
+	player_hp = player_max_hp
+	player_mp = player_max_mp
 	cur_hp.text = "HP:" + str(int(player_hp)) + "/" + str(int(player_max_hp))
 	
 
@@ -76,6 +102,7 @@ func _ready() -> void:
 	
 	Messages.player_healed.connect(on_player_healed)
 	Messages.back_to_title.connect(queue_free)
+	damage_area.damage_taken.connect(on_damage_taken)
 	point_light_2d.enabled = false
 	
 	initialize_states()
@@ -198,4 +225,13 @@ func on_player_healed( amount : float )->void :
 		player_hp = player_max_hp
 		
 	cur_hp.text = "HP:" + str(int(player_hp)) + "/" + str(int(player_max_hp))
+	pass
+
+func on_damage_taken(attackarea: AttackArea) -> void :
+	
+	if current_state == current_state.death :
+		return
+		
+	player_hp -= attackarea.attack_damage
+	damage_taken.emit()
 	pass

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://bi3krjsipmw2b"]
+[gd_scene load_steps=9 format=4 uid="uid://bi3krjsipmw2b"]
 
 [ext_resource type="TileSet" uid="uid://3jgekgndmfkp" path="res://levels/TileSets/forest.tres" id="1_gtbox"]
 [ext_resource type="Script" uid="uid://b8r2sphs8h8st" path="res://general/scripts/level_bounds.gd" id="2_wmo3j"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://byy8ghkrl3til" path="res://general/player_spawn/player_spawn.tscn" id="4_wmo3j"]
 [ext_resource type="PackedScene" uid="uid://b1vm2bdrpj3xa" path="res://levels/Props/testDummy/testdummy.tscn" id="5_fq8f5"]
 [ext_resource type="PackedScene" uid="uid://bka60wfnkm4rk" path="res://levels/breakable_props/breakable.tscn" id="6_niqx4"]
+[ext_resource type="PackedScene" uid="uid://bmppb2fyhi6hj" path="res://levels/Props/testDummy/spikedummy.tscn" id="7_64bul"]
+[ext_resource type="PackedScene" uid="uid://dsmltskakqav5" path="res://general/save_point/save_point.tscn" id="8_5yrd1"]
 
 [node name="00" type="Node2D"]
 
@@ -26,19 +28,27 @@ location = 1
 target_level = "uid://duybngp0d40wa"
 
 [node name="PlayerSpawn" parent="." instance=ExtResource("4_wmo3j")]
-position = Vector2(168, 144)
+position = Vector2(456, 192)
 
 [node name="Testdummy" parent="." instance=ExtResource("5_fq8f5")]
-position = Vector2(488, 197)
+position = Vector2(88, 101)
 
 [node name="Breakable" parent="." instance=ExtResource("6_niqx4")]
-position = Vector2(352, 181)
+position = Vector2(304, 181)
 
 [node name="Breakable2" parent="." instance=ExtResource("6_niqx4")]
-position = Vector2(430, 181)
+position = Vector2(382, 181)
 
 [node name="Breakable3" parent="." instance=ExtResource("6_niqx4")]
-position = Vector2(391.5, 181)
+position = Vector2(343.5, 181)
 
 [node name="Breakable4" parent="." instance=ExtResource("6_niqx4")]
-position = Vector2(392, 149.5)
+position = Vector2(344, 149.5)
+
+[node name="Spikedummy" parent="." instance=ExtResource("7_64bul")]
+position = Vector2(224, 163.5)
+
+[node name="SavePoint" parent="." instance=ExtResource("8_5yrd1")]
+position = Vector2(496, 138.25)
+
+[node name="PlayerSpawn2" parent="." instance=ExtResource("4_wmo3j")]

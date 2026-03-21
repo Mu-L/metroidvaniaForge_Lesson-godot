@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="HitParticlesSettings" load_steps=4 format=3 uid="uid://5e8ohapd3kli"]
+
+[ext_resource type="Script" uid="uid://8ankca1drt7g" path="res://global/VisualFX/hitparticlesettings.gd" id="1_mfkbl"]
+
+[sub_resource type="Gradient" id="Gradient_mfkbl"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_n3ra5"]
+gradient = SubResource("Gradient_mfkbl")
+width = 2
+height = 2
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[resource]
+script = ExtResource("1_mfkbl")
+count = 15
+color = Color(0.8530103, 0.028206939, 0.028206939, 1)
+texture = SubResource("GradientTexture2D_n3ra5")
+metadata/_custom_type_script = "uid://8ankca1drt7g"
