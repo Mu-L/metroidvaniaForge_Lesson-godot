@@ -19,10 +19,11 @@ var on_cooldown : bool = false
 
 
 func enter() -> void :
-	enemy.play_animation(animation_name if animation_name else "Attack")
+	var anim : String = animation_name if animation_name else "Attack"
+	enemy.play_animation(anim)
 	duration = enemy.animation.current_animation_length
+	print(duration)
 	timer = 0
-	print("enemy attacked!")
 	blackboard.can_decide = false
 	on_cooldown = true
 	enemy.velocity.x = walkspeed * blackboard.dir
@@ -35,6 +36,7 @@ func re_enter() -> void :
 func exit() -> void :
 	#when enemy moves to next state
 	#enemy.velocity.x = walkspeed * blackboard.dir
+
 	blackboard.can_decide = true
 	run_attack_cooldown()
 	pass
@@ -48,7 +50,8 @@ func physics_update(_delta: float) -> void:
 
 func can_attack() -> bool :
 	if blackboard.distance_to_target <= attack_range and not on_cooldown:
-		print(blackboard.distance_to_target , ":" , attack_range , ":" ,on_cooldown)
+		print("Distance to Target : ", 
+			blackboard.distance_to_target , " : Attack Range : " , attack_range , " : " ,on_cooldown)
 		return true
 	return false
 

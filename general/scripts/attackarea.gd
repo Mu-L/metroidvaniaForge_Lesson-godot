@@ -3,6 +3,7 @@ class_name AttackArea
 extends Area2D
 
 @export var attack_damage : float = 0.0
+#create an attack enum here, heavy ,piercing , slash, magic
 
 func _ready() -> void:
 	body_entered.connect(on_body_entered)

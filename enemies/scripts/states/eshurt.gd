@@ -5,6 +5,7 @@ extends EnemyState
 var velx : float = 0
 var duration : float = 0
 var timer : float = 0
+var attackdirection : float = 0 
 
 func start() -> void :
 	var anim : String = animation_name if animation_name else "hurt"
@@ -16,6 +17,10 @@ func start() -> void :
 
 	timer = 0
 	calculate_velocity(blackboard.damage_source)
+	attackdirection = sign(
+	blackboard.damage_source.global_position.x
+	- enemy.global_position.x)
+	_check_for_back_attack()
 	blackboard.damage_source = null
 	blackboard.can_decide = false
 	pass
@@ -45,8 +50,13 @@ func physics_update(delta: float) -> void:
 	
 func calculate_velocity(a : AttackArea) -> void :
 	velx = 1
-	print(a.global_position.x)
 	if a.global_position.x > enemy.global_position.x :
 		velx = -1
 	velx *= knockbackstrength
 	pass
+
+func _check_for_back_attack() -> void : 
+	if attackdirection < 0 :
+		enemy.change_direction(attackdirection)
+	pass
+ 

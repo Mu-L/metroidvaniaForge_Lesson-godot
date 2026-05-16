@@ -18,8 +18,7 @@ extends DecisionEngine
 @onready var es_move: ESMove = %ESMove
 @onready var es_hurt: ESHurt = %ESHurt
 @onready var es_death: ESDeath = %ESDeath
-@onready var es_attack :ESAttack = %ESAttack
-@onready var es_chase : ESChase = %ESChase
+ 
 #@onready var es_attack 
 
 
@@ -36,16 +35,15 @@ func decide() -> EnemyState :
 		else:
 			return es_hurt 
 			
-	if current_state is ESDeath and not blackboard.can_decide :
+	if current_state is ESDeath or not blackboard.can_decide :
 		return null
 	#
 	if blackboard.target :
-		if state_attack.can_attack() :
-			return es_attack
-		#else statement Enemy is IDLE 
-		return es_chase
-
- 
+		if state_attack.can_attack():
+			return state_attack
+		#else set enemy to idle if attack is within edge  
+		return state_chase
+		
 	if blackboard.edge_detected :
 		enemy.change_direction(-blackboard.dir)
 	return es_move

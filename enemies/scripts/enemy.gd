@@ -7,6 +7,8 @@ signal direction_changed(newdir)
 signal was_hit( a : AttackArea)
 signal was_killed()
 
+@onready var attack_area: AttackArea = %AttackArea
+
 @export var hp : float = 3
 @export var is_affected_by_gravity : bool = true
 @export var is_facing_left_on_start : bool = false :
@@ -21,7 +23,7 @@ var sprite : Sprite2D
 var animation : AnimationPlayer
 var damage_area : DamageArea
 var hazard_area : HazardArea
-@onready var attack_area : AttackArea = %AttackArea
+
 
 var statemachine : EnemyStateMachine
 var decisionengine : DecisionEngine
