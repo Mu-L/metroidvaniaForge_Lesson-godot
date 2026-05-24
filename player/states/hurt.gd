@@ -49,15 +49,13 @@ func process(_delta: float) -> PlayerState:
 
 func physics_process(_delta: float) -> PlayerState:
 	player.velocity.x = movespeed * knockbackdirection
-	
 	return null
 
 func _on_damage_taken(attackarea : AttackArea) -> void :
 	if player.current_state == death :
 		return
-		
+
 	player.change_state(self)
-	
 	
 	if attackarea.global_position.x < player.global_position.x :
 		knockbackdirection = 1.0

@@ -20,4 +20,6 @@ func physics_update(_delta: float) -> void:
 	var dir : float = sign(blackboard.target.global_position.x - enemy.global_position.x)
 	enemy.change_direction(dir)
 	enemy.velocity.x = chase_speed * dir
+	
+	#check if there is ledge
 	pass

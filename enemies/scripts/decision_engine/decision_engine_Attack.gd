@@ -13,6 +13,7 @@ extends DecisionEngine
 
 @export var state_attack : ESAttack
 @export var state_chase : ESChase
+@export var state_idle : ESIdle
 @export var attack_distance : float = 40
 
 @onready var es_move: ESMove = %ESMove
@@ -38,11 +39,14 @@ func decide() -> EnemyState :
 	if current_state is ESDeath or not blackboard.can_decide :
 		return null
 	#
-	if blackboard.target :
+	if blackboard.target:
+		if blackboard.edge_detected :
+			return state_idle
+			
 		if state_attack.can_attack():
 			return state_attack
-		#else set enemy to idle if attack is within edge  
 		return state_chase
+
 		
 	if blackboard.edge_detected :
 		enemy.change_direction(-blackboard.dir)

@@ -670,6 +670,7 @@ debug_color = Color(0.9480516, 0.08887396, 0, 0.41960785)
 
 [node name="GroundSlamAttackArea" type="Area2D" parent="."]
 unique_name_in_owner = true
+visible = false
 light_mask = 0
 visibility_layer = 96
 collision_layer = 0
@@ -723,7 +724,7 @@ pitch_scale = 0.83
 [node name="LandSFX" type="AudioStreamPlayer2D" parent="PlayerSFX"]
 unique_name_in_owner = true
 stream = ExtResource("23_s7qer")
-volume_db = -7.913
+volume_db = -12.766
 
 [node name="AttackSFX" type="AudioStreamPlayer2D" parent="PlayerSFX"]
 unique_name_in_owner = true

@@ -1,9 +1,12 @@
 class_name ESIdle
 extends EnemyState
- 
+
+
 
 func enter() -> void :
-	#when enemy enters this state
+	var anim : String = animation_name if animation_name else "Idle"
+	enemy.play_animation(anim)
+	enemy.velocity.x = 0
 	pass
 
 func re_enter() -> void :

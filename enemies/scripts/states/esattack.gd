@@ -11,7 +11,9 @@ extends EnemyState
 #@export var animation_name : String = "idle
 @export var cooldown : float = 3.0
 @export var walkspeed : float = 50
+@export var attack_velocity_curve : Curve
 @export var attack_range : float = 50
+
 
 var duration : float = 0
 var timer : float = 0
@@ -34,9 +36,6 @@ func re_enter() -> void :
 	pass
 
 func exit() -> void :
-	#when enemy moves to next state
-	#enemy.velocity.x = walkspeed * blackboard.dir
-
 	blackboard.can_decide = true
 	run_attack_cooldown()
 	pass
@@ -46,6 +45,10 @@ func physics_update(_delta: float) -> void:
 	timer += _delta
 	if timer >= duration:
 		blackboard.can_decide = true
+	
+	if attack_velocity_curve :
+		var sample : float = attack_velocity_curve.sample(timer / duration)
+		enemy.velocity.x = walkspeed * sample * blackboard.dir
 	pass
 
 func can_attack() -> bool :
