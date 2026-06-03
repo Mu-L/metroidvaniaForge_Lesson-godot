@@ -10,13 +10,15 @@ enum ATTACKTYPE { LIGHT , HEAVY , KNOCKBACK }
 
 @export var attackdamage1 : float = 3
 @export var attackdamage2 : float = 2
-@export var atkcd1 : float = 3.0
-@export var atkcd2 : float = 1.5
+@export var knockbackforce1 : float = 200
+@export var knockbackforce2 : float = 150
 @export var cooldown : float = 4
 
 @export var rise_gravity_multiplier : float = 1.0
 @export var fall_gravity_multiplier : float = 2.5
 
+var can_use_axe_attack : bool = false
+var can_use_kick_attack : bool = false
 
 var hurtbox_size_x : float = 0
 var hurtbox_size_y : float = 0
@@ -24,18 +26,33 @@ var hurtbox_position_x : float = 0
 var hurtbox_position_y : float = 0
 var attackcnt : int = 1
 var finaldamage : float = 0
-
+var distancetotarget : float = 0
 
 var duration : float = 0
 var timer : float = 0
 var on_cooldown : bool = false 
 
 
-
 func enter() -> void :
-	normal_attack_pattern()
-	print("Attack State - just attacked : " , blackboard.just_attacked)
+	print("Enemy Distance to Target : ", distancetotarget)
+	if blackboard.just_jumped :
+		jump_attack_pattern()
+		blackboard.just_jumped = false
+		
+	if can_use_axe_attack :
+		axe_attack_pattern()
 
+	if can_use_kick_attack :
+		kick_attack_patter()
+		
+	prepare_attack_parameters()
+	duration = enemy.animation.current_animation_length
+	enemy.velocity.x = reposition_distance * blackboard.dir
+	on_cooldown = true
+	timer = 0
+	blackboard.can_decide = false
+
+	
 	#print("Animation Name : " , anim , 
 	#" hurtbox X : ",hurtbox_size_x ,
 	#" hurtbox Y : " , hurtbox_size_y , 
@@ -51,8 +68,8 @@ func re_enter() -> void :
 
 func exit() -> void :
 	blackboard.can_decide = true
+	blackboard.just_jumped = false
 	blackboard.gravity_multiplier = 1.0
-	enemy.attack_area.reset_attack_properties()
 	run_attack_cooldown()
 	pass
 
@@ -67,47 +84,50 @@ func physics_update(_delta: float) -> void:
 		
 	if timer >= duration:
 		blackboard.can_decide = true
-
+	
+	if attackcnt == 1 and blackboard.punishattack:
+		blackboard.just_attacked = true
+		
 	if attack_velocity_curve :
 		var sample : float = attack_velocity_curve.sample(timer / duration)
 		enemy.velocity.x = reposition_distance * sample * blackboard.dir
 	pass
-
+	
+#rework 
+# can_attack becomes can_jump attack - move the attack animation logic here
+# can_axe_attack - move attack animation here 
+# can kick attack - move kick animation here 
+#func can_axe_attack() -> bool :
+	#if blackboard.distance_to_target <= attack_range and not on_cooldown:
+		#distancetotarget = blackboard.distance_to_target
+		#if distancetotarget > 80 :
+			#jump_attack_pattern()
+			#return true
+	#return false
+	#
 func can_attack() -> bool :
 	if blackboard.distance_to_target <= attack_range and not on_cooldown:
-		var distancetotarget = blackboard.distance_to_target
-
-		print("Distance to target : " , blackboard.distance_to_target)
-		#To optimize the variables below later.
-		
-		if distancetotarget > 80:
-			set_up_attack_variables(1,atkcd1,48,120,72,-60,200,attackdamage1)
+		distancetotarget = blackboard.distance_to_target
+		if distancetotarget > 80 :
+			can_use_axe_attack = true
+			can_use_kick_attack = false
 			
-		elif ( distancetotarget > 20 and 
-			distancetotarget <= 80 and 
-			enemy.velocity.y == 0 and 
-			enemy.is_on_floor()):
-			set_up_attack_variables(2,atkcd2,24,24,48,-32,50,attackdamage2)
-		
-
+		if (distancetotarget >= 30 and distancetotarget <= 80 ):
+			can_use_axe_attack = false
+			can_use_kick_attack = true
 		return true
 	return false
 
 func run_attack_cooldown() -> void :
-	#if attackcnt == 1 :
-		#cooldown = atkcd1
-	#else:
-		#cooldown = atkcd2
 	await get_tree().create_timer(cooldown).timeout
 	on_cooldown = false
 	pass
 	
-func set_up_attack_variables( ac : int , atkcd : float , 
+func set_up_attack_variables( ac : int , 
 	hbszx : float , hbszy : float , 
 	hbposx : float , hbposy : float, 
 	sp : float , dmg : float ) -> void :
 	attackcnt = ac    # attack count 
-	cooldown = atkcd  # cooldown 
 	hurtbox_size_x = hbszx # shape size X 
 	hurtbox_size_y = hbszy # shape size Y 
 	hurtbox_position_x = hbposx
@@ -116,24 +136,30 @@ func set_up_attack_variables( ac : int , atkcd : float ,
 	finaldamage = dmg # damage
 	pass
 
-
-
-func normal_attack_pattern () -> void :
-	var attackname : String = "Attack"
-	var anim : String = animation_name if animation_name else attackname + str(attackcnt)
+func kick_attack_patter() -> void :
+	set_up_attack_variables(2,24,24,48,-32,50,attackdamage2)
+	var anim : String = animation_name if animation_name else "Attack2"
 	enemy.play_animation(anim)
-	duration = enemy.animation.current_animation_length
-	timer = 0
-	enemy.attack_area.compute_attack_properties(hurtbox_size_x,hurtbox_size_y,hurtbox_position_x,hurtbox_position_y,finaldamage)
-	blackboard.can_decide = false
-	
-	
-	if attackcnt == 1 and blackboard.punishattack:
-		blackboard.just_attacked = true
-		
-	on_cooldown = true
-	enemy.velocity.x = reposition_distance * blackboard.dir
+	can_use_kick_attack = false
 
-func retaliation_pattern() -> void :
+	
+func axe_attack_pattern () -> void :
+	set_up_attack_variables(1,48,120,72,-60,200,attackdamage1)
+	var anim : String = animation_name if animation_name else "Attack1"
+	enemy.play_animation(anim)
+	can_use_axe_attack = false
+	
+func jump_attack_pattern() -> void :
+	set_up_attack_variables(1,48,120,72,-60,200,attackdamage1)
+	var anim : String = animation_name if animation_name else "Attack1"
+	enemy.play_animation(anim)
+
+func prepare_attack_parameters() -> void :
+	var kbf : float = 0 
+	if attackcnt == 1 :
+		kbf = knockbackforce1
+	else :
+		kbf = knockbackforce2
+	enemy.attack_area.compute_attack_properties(hurtbox_size_x,hurtbox_size_y,hurtbox_position_x,hurtbox_position_y,finaldamage,kbf)
 	pass
 	

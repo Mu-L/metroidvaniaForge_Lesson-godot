@@ -48,7 +48,7 @@ func process(_delta: float) -> PlayerState:
 	return null
 
 func physics_process(_delta: float) -> PlayerState:
-	player.velocity.x = movespeed * knockbackdirection
+	player.velocity.x = ( movespeed + player.knockback_force ) * knockbackdirection
 	return null
 
 func _on_damage_taken(attackarea : AttackArea) -> void :

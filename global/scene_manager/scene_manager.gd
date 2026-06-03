@@ -7,6 +7,7 @@ signal load_scene_finished
 signal scene_entered(uid :String)
 signal check_boss_cinematic()
 signal play_cinematic()
+signal cinematic_sequence_finished
 @warning_ignore_restore("unused_signal")
 
 var current_scene_uid : String

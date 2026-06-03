@@ -8,7 +8,7 @@ var timer : float = 0
 
 func enter() -> void :
 	var anim : String = animation_name if animation_name else "Cinematic"
-	
+
 	enemy.play_animation(anim)
 	duration = enemy.animation.current_animation_length
 	enemy.velocity.x = 0 
@@ -23,8 +23,9 @@ func re_enter() -> void :
 func exit() -> void :
 	#when enemy moves to next state
 	blackboard.can_decide = true
-	BossHud.display_boss_hp(blackboard.enemy_name)
- 	
+	BossHud.display_boss_hp(blackboard.enemy_name,blackboard.health,blackboard.maxhealth)
+	SceneManager.cinematic_sequence_finished.emit()
+	enemy.attack_area.reset_attack_properties(48,120,72,-60)
 	pass
 
 func physics_update(_delta: float) -> void:

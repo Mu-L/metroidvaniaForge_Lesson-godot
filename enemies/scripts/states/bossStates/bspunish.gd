@@ -6,6 +6,7 @@ var timer : float = 0
 var on_cooldown : bool = false 
 var punish_hit : int = 0 
 
+
 func enter() -> void :
 	var anim : String = animation_name if animation_name else "PunishWindow"
 	enemy.play_animation(anim)
@@ -14,11 +15,9 @@ func enter() -> void :
 	timer = 0
 	blackboard.can_decide = false
 	blackboard.damage_source = null
-	blackboard.can_retaliate = false 
 	
 	if !enemy.damage_counter.is_connected(_on_enemy_punished):
 		enemy.damage_counter.connect(_on_enemy_punished)
-		
 	pass
 
 func re_enter() -> void :
@@ -26,18 +25,19 @@ func re_enter() -> void :
 	pass
 
 func exit() -> void :
-	#when enemy moves to next state
-	
-	if punish_hit > 0 :
-		blackboard.can_retaliate = true 
 	reset_punish_parameters()
 	pass
 
 func physics_update(_delta: float) -> void:
 	timer += _delta
+	
+	if punish_hit > 0 :
+		blackboard.can_retaliate = true 
+
 	if timer >= duration:
 		blackboard.can_decide = true
 		blackboard.punishattack = false
+		blackboard.just_attacked = false
 	pass
 
 func _on_enemy_punished() -> void :

@@ -45,6 +45,7 @@ func decide() -> EnemyState :
 			
 		if state_attack.can_attack():
 			return state_attack
+			
 		return state_chase
 
 		

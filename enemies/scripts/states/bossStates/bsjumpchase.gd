@@ -3,26 +3,29 @@ extends EnemyState
 
 @export var cooldown : float = 3.0
 @export var jump_force := Vector2(0,-300)
+@export var descending_gravity : float = 2.5
+
 var on_cooldown : bool = false 
 var duration : float = 0
 var timer : float = 0
 
+
 func enter() -> void:
-	print("you entered the jump state : ")
 	var anim : String = animation_name if animation_name else "Jump"
 	enemy.play_animation(anim)
 	duration = enemy.animation.current_animation_length
 	timer = 0
 	var dir := -1 if enemy.sprite.flip_h else 1
 	
-	enemy.velocity.x = jump_force.x * dir
+	var distance_to_player = enemy.global_position.distance_to(enemy.blackboard.target.global_position)
+	print(distance_to_player)
+	enemy.velocity.x = distance_to_player * dir
 	enemy.velocity.y = jump_force.y
-	
 	blackboard.can_decide = false
 	blackboard.punishattack = true
-	blackboard.just_attacked = false
-	
-	print("you entered the jump state and Punish Window is " , blackboard.punishattack) 
+	blackboard.just_jumped = true
+	blackboard.is_on_air = true
+	#print("you entered the jump state and Punish Window is " , blackboard.punishattack) 
 	on_cooldown = true
 	pass
 	
@@ -31,6 +34,7 @@ func re_enter() -> void :
 
 func exit() -> void :
 	blackboard.can_decide = true
+
 	enemy.animation.pause()
 	set_fall_frame()
 	run_chase_cooldown()
@@ -38,6 +42,8 @@ func exit() -> void :
 
 func physics_update(_delta: float) -> void:
 	timer += _delta
+	
+	blackboard.gravity_multiplier = descending_gravity
 	
 	if timer >= duration:
 		blackboard.can_decide = true
@@ -54,11 +60,11 @@ func run_chase_cooldown() -> void :
 	pass
 
 func set_fall_frame() -> void:
-	enemy.animation.seek(03 ,true)
+	enemy.animation.seek(duration ,true)
 	pass
 
 func reset_attack_paramaters() -> void :
 	if blackboard.wall_detected : 
-		print("compute jump distance here")
+		pass
 		#enemy.update_jump_coordinates()
 	pass

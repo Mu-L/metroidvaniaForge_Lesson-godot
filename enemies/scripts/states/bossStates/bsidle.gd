@@ -28,3 +28,5 @@ func physics_update(_delta: float) -> void:
 	if timer >= duration:
 		blackboard.can_decide = true
 	pass
+
+ 

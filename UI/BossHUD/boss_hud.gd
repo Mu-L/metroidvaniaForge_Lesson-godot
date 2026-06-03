@@ -15,14 +15,21 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass
+
+func load_boss_healhtbar( curhp : float  , maxhp : float ) -> void :
+	var val = ( curhp  / maxhp) * 100 
+	hp_bar.value = val
+	pass
 	
 func update_boss_healthbar( curhp : float  , maxhp : float ) -> void :
 	var val = ( curhp  / maxhp) * 100 
 	hp_bar.value = val
 	pass
 
-func display_boss_hp(n : String) -> void :
+func display_boss_hp(n : String , h : float , mh : float) -> void :
+	var val = ( h  / mh) * 100 
 	boss_hp_bar.visible = true
+	hp_bar.value = val
 	label.text = n
 	pass
 	

@@ -29,6 +29,8 @@ signal damage_taken()
 @onready var attack_area: AttackArea = %AttackArea
 @onready var damage_area: DamageArea = %DamageArea
 @onready var ground_slam_attack_area: AttackArea = %GroundSlamAttackArea
+@onready var test_alert_label: Label = %Label2
+
 
 #region // audio
 @onready var hurt_sfx: AudioStreamPlayer2D = %HurtSFX
@@ -93,6 +95,9 @@ var gravity : float = 980
 var gravity_multiplier : float = 1.0
 var hasdashed : bool = false
 var caninteract : bool = false
+var knockback_force : float = 0
+var can_move : bool = true
+var alert_player : bool = false
 #endregion
 
 func _ready() -> void:
@@ -102,14 +107,14 @@ func _ready() -> void:
 	player_mp = player_max_mp
 	cur_hp.text = "HP:" + str(int(player_hp)) + "/" + str(int(player_max_hp))
 	
-
-	
 	if get_tree().get_first_node_in_group("Player") != self:
 		self.queue_free()	
 	
 	Messages.player_healed.connect(on_player_healed)
 	Messages.back_to_title.connect(queue_free)
 	Messages.input_hint_changed.connect(on_input_hint_changed)
+	SceneManager.play_cinematic.connect(on_cinematic_mode)
+	SceneManager.cinematic_sequence_finished.connect(on_cinematic_finished)
 	damage_area.damage_taken.connect(on_damage_taken)
 	point_light_2d.enabled = false
 	
@@ -117,11 +122,16 @@ func _ready() -> void:
 	self.call_deferred("reparent" , get_tree().root)
 
 func _process(_delta: float) -> void:
+	if not can_move :
+		return
+		
 	update_direction()
 	change_state( current_state.process(_delta))
 	pass
 
 func _physics_process(_delta: float) -> void:
+	if not can_move :
+		return
 	#apply player gravity (basic implementation for now)
 	velocity.y += gravity * _delta * gravity_multiplier
 	velocity.y = clampf(velocity.y , -1000.0 , maxfallspeed)
@@ -240,6 +250,7 @@ func on_damage_taken(attackarea: AttackArea) -> void :
 	if current_state == current_state.death :
 		return
 	player_hp -= attackarea.attack_damage
+	knockback_force = attackarea.knockback_damage
 	damage_taken.emit()
 	pass
 
@@ -257,3 +268,15 @@ func player_can_morph() -> bool :
 	if morph_roll == false or caninteract:
 		return false
 	return true
+
+func on_cinematic_mode() -> void :
+	change_state(current_state.idle)
+	test_alert_label.visible = true
+	alert_player = true
+	can_move = false
+
+func on_cinematic_finished() -> void :
+	SceneManager.play_cinematic.disconnect(on_cinematic_mode)
+	can_move = true
+	test_alert_label.visible = false
+	alert_player = false

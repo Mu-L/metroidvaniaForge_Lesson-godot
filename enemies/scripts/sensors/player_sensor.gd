@@ -40,6 +40,7 @@ func _physics_process(delta: float) -> void:
 func on_body_entered(n : Node2D) -> void :
 	player_entered.emit()
 	enemy.blackboard.target = n
+	#this variable registers that a player was found regardless if is already out of sensor
 	timer = 0
 	pass
 	

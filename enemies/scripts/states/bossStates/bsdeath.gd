@@ -1,4 +1,4 @@
-class_name ESDeath
+class_name BSDeath
 extends EnemyState
 #meta-name : DecisionEngine
 #meta-description : Boilerplate for DecisionEngine

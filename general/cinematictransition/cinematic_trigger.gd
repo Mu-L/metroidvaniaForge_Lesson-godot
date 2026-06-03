@@ -9,6 +9,7 @@ enum LEVEL_TYPE { DUNGEON, FOREST }
 
 @onready var area_2d: Area2D = $Area2D
 
+var boss_area_trigger : bool = false
 
 @export_range( 2 , 16 , 1.0 ,"or_greater") var size : int = 2 :
 	set(value) :
@@ -37,6 +38,7 @@ func on_new_cinematic_ready( ) -> void :
 	pass
 
 func _on_player_entered( _n : Node2D) -> void :
+	boss_area_trigger = true
 	SceneManager.play_cinematic.emit()
 	area_2d.body_entered.disconnect( _on_player_entered )
 	pass

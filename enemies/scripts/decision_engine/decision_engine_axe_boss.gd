@@ -11,7 +11,7 @@ extends DecisionEngine
 
 
 @onready var es_move: ESMove = %ESMove
-@onready var es_death: ESDeath = %ESDeath
+@onready var es_death: BSDeath = %BSDeath
 @onready var bs_hurt: BSHurt = %BSHurt
 
 var previous_state : EnemyState
@@ -33,29 +33,32 @@ func decide() -> EnemyState :
 	if blackboard.damage_source:
 		if blackboard.health <= 0 :
 			return es_death 
-		elif blackboard.punishattack:
-			return state_punish
 		else:
 			return bs_hurt 
 			
 	if current_state is ESDeath or not blackboard.can_decide :
 		return null
+	
+	#forces the boss to attack even if there is no target after jump 
+	if blackboard.just_jumped:
+		return state_attack
 		
+	# transition from state attack to punish regardless 
 	if blackboard.punishattack and blackboard.just_attacked:
 		return state_punish
 	
 	if blackboard.target:
-		if state_attack.can_attack() :
-			return state_attack
-			
-		if state_jumpchase.decide_to_jump() and blackboard.wall_detected == false:
+		if state_jumpchase.decide_to_jump():
 			return state_jumpchase
-			
-		if blackboard.distance_to_target <= 20 and !state_attack.can_attack() and !state_jumpchase.decide_to_jump() :
+		
+		if state_attack.can_attack():
+			return state_attack
+	
+		if blackboard.distance_to_target <= 40 :
+			#for now do this, else make boss move bac
 			return state_idle
-
+			
 		return state_chase
-
 		#if blackboard.distance_to_target < 300 :
 			#return state_idle
 		
@@ -73,7 +76,6 @@ func decide() -> EnemyState :
 	#						transition to attack (upward swing)
 	#							if hit - launch player upwards 
 	#					if player is outside target area, return to idle
-
 			
 	#	else :
 	#		return es_chase
@@ -85,4 +87,5 @@ func _trigger_cinematic() -> void :
 	blackboard.cinematic_state_played = true
 	cinematic_triggered = true
 	SceneManager.play_cinematic.disconnect(_trigger_cinematic)
+	
 	pass

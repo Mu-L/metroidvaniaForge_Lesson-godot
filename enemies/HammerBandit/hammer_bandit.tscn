@@ -269,7 +269,7 @@ metadata/_custom_type_script = "uid://4kct7yi6wg7q"
 [node name="ESChase" type="Node" parent="EnemyStateMachine"]
 unique_name_in_owner = true
 script = ExtResource("12_t4qme")
-chase_speed = 50
+chase_speed = 60
 animation_name = "move"
 metadata/_custom_type_script = "uid://ddc3o6r6ohb60"
 

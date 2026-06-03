@@ -6,8 +6,10 @@ extends EnemyState
 
 func enter() -> void :
 	#when enemy enters this state
-	enemy.play_animation(animation_name if animation_name else "move")
 	reset_attack_paramaters()
+	print("entered BSChase state")
+	enemy.play_animation(animation_name if animation_name else "move")
+	
 	pass
 
 func re_enter() -> void :
@@ -20,8 +22,6 @@ func exit() -> void :
 
 func physics_update(_delta: float) -> void:
 	var dir : float = sign(blackboard.target.global_position.x - enemy.global_position.x)
-	
-
 	enemy.change_direction(dir)
 	enemy.velocity.x = chase_speed * dir
 	
@@ -34,4 +34,8 @@ func physics_update(_delta: float) -> void:
 func reset_attack_paramaters() -> void :
 	blackboard.punishattack = false
 	blackboard.just_attacked = false
+	blackboard.is_on_air = false
+	pass
+
+func check_if_enemy_on_floor( ) -> void : 
 	pass
