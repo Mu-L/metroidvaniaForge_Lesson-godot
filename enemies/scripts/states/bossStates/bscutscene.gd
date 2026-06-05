@@ -8,7 +8,6 @@ var timer : float = 0
 
 func enter() -> void :
 	var anim : String = animation_name if animation_name else "Cinematic"
-
 	enemy.play_animation(anim)
 	duration = enemy.animation.current_animation_length
 	enemy.velocity.x = 0 

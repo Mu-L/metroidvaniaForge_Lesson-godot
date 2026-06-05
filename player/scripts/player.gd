@@ -18,6 +18,7 @@ signal damage_taken()
 @onready var ground_slam_shape_cast: ShapeCast2D = %GroundSlamShapeCast
 @onready var walljumpleftraycast: RayCast2D = %walljumpleftraycast
 @onready var walljumprightraycast: RayCast2D = %walljumprightraycast
+@onready var camera_2d: PlayerCamera = %Camera2D
 
 
 @onready var point_light_2d: PointLight2D = %PointLight2D
@@ -280,3 +281,4 @@ func on_cinematic_finished() -> void :
 	can_move = true
 	test_alert_label.visible = false
 	alert_player = false
+	

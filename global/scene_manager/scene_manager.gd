@@ -8,6 +8,8 @@ signal scene_entered(uid :String)
 signal check_boss_cinematic()
 signal play_cinematic()
 signal cinematic_sequence_finished
+signal boss_area_entered
+signal boss_area_limits(cl:float,cr:float,cb:float,ct:float,cc:float)
 @warning_ignore_restore("unused_signal")
 
 var current_scene_uid : String
