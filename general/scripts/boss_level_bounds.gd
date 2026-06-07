@@ -17,7 +17,7 @@ extends Node2D
 @export var zoom_y : float = 1.0
 @export var zoom_duration := 0.5 # Duration in seconds
 
-var player_in_boss_area : bool = false
+var boss_is_defeated : bool = false
 var camlimit_left : float
 var camlimit_right : float
 var camlimit_top : float
@@ -41,6 +41,7 @@ func _ready() -> void:
 	camlimit_top = int(global_position.y)
 	camlimit_bottom = int(global_position.y) + boss_height
 	SceneManager.boss_area_entered.connect(_on_boss_area_entered)
+	SceneManager.boss_defeated.connect(_on_boss_defeated)
 	
 	#var viewport_size = get_viewport_rect().size
 	#var zoom_x = viewport_size.x / boss_width
@@ -71,6 +72,9 @@ func on_height_change(nh : int) -> void :
 
 func _on_boss_area_entered() -> void :
 	new_camera_centerpos = global_position.x + boss_width * 0.5
-	print(new_camera_centerpos)
 	SceneManager.boss_area_limits.emit(camlimit_left,camlimit_right,camlimit_top,camlimit_bottom,new_camera_centerpos)
+	pass
+
+func _on_boss_defeated()-> void :
+	boss_is_defeated = true
 	pass

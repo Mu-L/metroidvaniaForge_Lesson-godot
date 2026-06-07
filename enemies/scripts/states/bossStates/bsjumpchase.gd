@@ -1,6 +1,12 @@
 class_name BSJumpChase
 extends EnemyState
 
+
+@onready var male_grunt_1_fast: AudioStreamPlayer = %MaleGrunt1Fast
+@onready var male_grunt_2: AudioStreamPlayer = %MaleGrunt2
+
+
+
 @export var cooldown : float = 3.0
 @export var jump_force := Vector2(0,-300)
 @export var descending_gravity : float = 2.5
@@ -25,6 +31,7 @@ func enter() -> void:
 	blackboard.punishattack = true
 	blackboard.just_jumped = true
 	blackboard.is_on_air = true
+	male_grunt_2.play()
 	#print("you entered the jump state and Punish Window is " , blackboard.punishattack) 
 	on_cooldown = true
 	pass

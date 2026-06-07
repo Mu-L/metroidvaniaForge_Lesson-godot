@@ -4,8 +4,6 @@ extends CanvasLayer
 @onready var hp_bar: TextureProgressBar = %HPBar
 @onready var boss_hp_bar: Control = %BossHPBar
 @onready var label: Label = %Label
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Messages.boss_hp_changed.connect(update_boss_healthbar)
@@ -32,4 +30,17 @@ func display_boss_hp(n : String , h : float , mh : float) -> void :
 	hp_bar.value = val
 	label.text = n
 	pass
+
+func hide_boss_hp() -> void :
+	boss_hp_bar_tween(0,.1)
+	await get_tree().process_frame
+	#boss_hp_bar.visible = false
+	pass
 	
+
+func boss_hp_bar_tween(mv: float , md : float)-> Signal :
+	var nmv = mv
+	var nmd = md
+	var tween : Tween = create_tween()
+	tween.tween_property(boss_hp_bar ,"modulate:a", nmv, nmd)
+	return tween.finished

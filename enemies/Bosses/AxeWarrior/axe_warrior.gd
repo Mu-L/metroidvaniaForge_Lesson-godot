@@ -4,6 +4,9 @@ class_name BossEnemy
 extends Enemy
 
 
+
+@onready var bosstheme_2: AudioStreamPlayer = %Bosstheme2
+
 @export var enemy_name : String = "Axe Warrior"
 @export_category("Audio")
 
@@ -20,6 +23,7 @@ func SetUp() -> void :
 	blackboard.health = hp
 	blackboard.maxhealth = maxhp
 	blackboard.enemy_name = enemy_name
+	blackboard.theme_song = bosstheme_2
 	for c in get_children():
 		if c is AnimationPlayer and not animation :
 			animation = c

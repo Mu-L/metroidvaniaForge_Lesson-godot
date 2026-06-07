@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://bi3krjsipmw2b"]
+[gd_scene load_steps=14 format=4 uid="uid://bi3krjsipmw2b"]
 
 [ext_resource type="TileSet" uid="uid://3jgekgndmfkp" path="res://levels/TileSets/forest.tres" id="1_gtbox"]
 [ext_resource type="Script" uid="uid://b8r2sphs8h8st" path="res://general/scripts/level_bounds.gd" id="2_wmo3j"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cdvnj32ug6vrx" path="res://enemies/HammerBandit/hammer_bandit.tscn" id="9_ckra4"]
 [ext_resource type="PackedScene" uid="uid://c83lby087atbn" path="res://enemies/Bosses/AxeWarrior/AxeWarrior.tscn" id="10_5h1wb"]
 [ext_resource type="PackedScene" uid="uid://by7b841qtq6bt" path="res://general/cinematictransition/cinematic_trigger.tscn" id="11_xayrj"]
+[ext_resource type="AudioStream" uid="uid://c2owq0mu66h0p" path="res://global/Audio/audio/bosstheme1.ogg" id="13_cnft5"]
 
 [node name="00" type="Node2D"]
 
@@ -63,8 +64,10 @@ position = Vector2(928, -25)
 
 [node name="AxeWarrior" parent="." instance=ExtResource("10_5h1wb")]
 z_index = 2
-position = Vector2(1844, 232)
+position = Vector2(1920, 232)
 
 [node name="CinematicTrigger" parent="." instance=ExtResource("11_xayrj")]
 position = Vector2(1688, -64)
+track = ExtResource("13_cnft5")
+reverb = 1
 size = 4

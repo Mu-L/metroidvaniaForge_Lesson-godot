@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://c83lby087atbn"]
+[gd_scene load_steps=54 format=3 uid="uid://c83lby087atbn"]
 
 [ext_resource type="Script" uid="uid://b6h4lydgf7x05" path="res://enemies/Bosses/AxeWarrior/axe_warrior.gd" id="1_bf73e"]
 [ext_resource type="Texture2D" uid="uid://cm2up3d2by1es" path="res://enemies/sprites/Boss3_96x96.png" id="2_pcblf"]
@@ -25,6 +25,12 @@
 [ext_resource type="Script" uid="uid://8ankca1drt7g" path="res://global/VisualFX/hitparticlesettings.gd" id="20_tdavc"]
 [ext_resource type="Script" uid="uid://crxnp7t2mcd67" path="res://general/scripts/attackarea.gd" id="21_k6u23"]
 [ext_resource type="Script" uid="uid://c5yujg5qkk83s" path="res://enemies/scripts/decision_engine/decision_engine_axe_boss.gd" id="21_pcblf"]
+[ext_resource type="AudioStream" uid="uid://bwpspxrb18co3" path="res://global/Audio/audio/male_grunt_2.ogg" id="26_koohr"]
+[ext_resource type="AudioStream" uid="uid://bibfixkmvfgqp" path="res://global/Audio/audio/male_grunt1_fast.ogg" id="26_yx0iq"]
+[ext_resource type="AudioStream" uid="uid://dm7bqwdx45bqw" path="res://global/Audio/audio/grunt_attack1.ogg" id="27_1c8on"]
+[ext_resource type="AudioStream" uid="uid://cxoxt2jmkc8tm" path="res://global/Audio/audio/male_grunt3.ogg" id="28_4styd"]
+[ext_resource type="AudioStream" uid="uid://c7wjvku3y77ro" path="res://global/Audio/audio/Slash_SFX.ogg" id="28_gmgb1"]
+[ext_resource type="AudioStream" uid="uid://b8y3im2mqcu65" path="res://global/Audio/audio/bosstheme2.ogg" id="30_v2jdw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gplsp"]
 radius = 16.0
@@ -364,8 +370,6 @@ size = Vector2(48, 120)
 collision_layer = 0
 collision_mask = 3
 script = ExtResource("1_bf73e")
-hp = 50.0
-maxhp = 50.0
 is_facing_left_on_start = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -423,7 +427,7 @@ metadata/_custom_type_script = "uid://dggmx3o0vi56k"
 [node name="ESMove" type="Node" parent="EnemyStateMachine"]
 unique_name_in_owner = true
 script = ExtResource("7_koohr")
-walkspeed = 80.0
+walkspeed = 90.0
 metadata/_custom_type_script = "uid://667f8eabi1hk"
 
 [node name="BSHurt" type="Node" parent="EnemyStateMachine"]
@@ -461,7 +465,7 @@ metadata/_custom_type_script = "uid://ca56a1jjeibqn"
 [node name="BSChase" type="Node" parent="EnemyStateMachine"]
 unique_name_in_owner = true
 script = ExtResource("14_qixjo")
-chase_speed = 110
+chase_speed = 120
 metadata/_custom_type_script = "uid://q30otavcsey2"
 
 [node name="BSIdle" type="Node" parent="EnemyStateMachine"]
@@ -499,7 +503,7 @@ metadata/_custom_type_script = "uid://c5yujg5qkk83s"
 [node name="PLayerSensor" type="Area2D" parent="."]
 position = Vector2(0, -50)
 script = ExtResource("16_dyfso")
-search_duration = 3.0
+search_duration = 1.0
 metadata/_custom_type_script = "uid://4e0tbrxyjd4k"
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="PLayerSensor"]
@@ -530,3 +534,38 @@ metadata/_custom_type_script = "uid://crxnp7t2mcd67"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
 shape = SubResource("RectangleShape2D_7ofsg")
 debug_color = Color(0.70196074, 0, 0.005449592, 0.41960785)
+
+[node name="SFX" type="Node2D" parent="."]
+
+[node name="MaleGrunt2" type="AudioStreamPlayer" parent="SFX"]
+unique_name_in_owner = true
+stream = ExtResource("26_koohr")
+volume_db = -7.0
+pitch_scale = 1.08
+
+[node name="GruntAttack1" type="AudioStreamPlayer" parent="SFX"]
+unique_name_in_owner = true
+stream = ExtResource("27_1c8on")
+volume_db = -14.727
+
+[node name="MaleGrunt3" type="AudioStreamPlayer" parent="SFX"]
+unique_name_in_owner = true
+stream = ExtResource("28_4styd")
+volume_db = -18.233
+
+[node name="MaleGrunt1Fast" type="AudioStreamPlayer" parent="SFX"]
+unique_name_in_owner = true
+stream = ExtResource("26_yx0iq")
+volume_db = -5.402
+pitch_scale = 0.87
+
+[node name="Bosstheme2" type="AudioStreamPlayer" parent="SFX"]
+unique_name_in_owner = true
+stream = ExtResource("30_v2jdw")
+volume_db = -12.0
+
+[node name="SlashSfx" type="AudioStreamPlayer" parent="SFX"]
+unique_name_in_owner = true
+stream = ExtResource("28_gmgb1")
+volume_db = -24.987
+pitch_scale = 0.79

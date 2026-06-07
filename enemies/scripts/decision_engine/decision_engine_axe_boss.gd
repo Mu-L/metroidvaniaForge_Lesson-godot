@@ -28,6 +28,7 @@ func decide() -> EnemyState :
 		return state_idle
 		
 	if blackboard.cinematic_state_played:
+		
 		return state_cinematic
 	
 	if blackboard.damage_source:

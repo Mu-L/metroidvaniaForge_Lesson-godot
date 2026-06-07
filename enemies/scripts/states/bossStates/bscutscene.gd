@@ -3,12 +3,13 @@ extends EnemyState
 
 var duration : float = 0
 var timer : float = 0
+var themesong_started : bool = false
  
-
 
 func enter() -> void :
 	var anim : String = animation_name if animation_name else "Cinematic"
 	enemy.play_animation(anim)
+	blackboard.theme_song.play()
 	duration = enemy.animation.current_animation_length
 	enemy.velocity.x = 0 
 	timer = 0
@@ -32,4 +33,7 @@ func physics_update(_delta: float) -> void:
 	if timer >= duration:
 		blackboard.can_decide = true
 		blackboard.cinematic_state_played = false
+		
+	if enemy.sprite.frame == 40 and themesong_started == false:
+		themesong_started = true
 	pass

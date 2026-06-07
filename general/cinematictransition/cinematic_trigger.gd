@@ -7,6 +7,9 @@ enum SIDE { LEFT , RIGHT , TOP , BOTTOM }
 enum LEVEL_TYPE { DUNGEON, FOREST }
 
 @onready var area_2d: Area2D = $Area2D
+@export var track : AudioStream
+@export var reverb : Audio.REVERB_TYPE = Audio.REVERB_TYPE.none
+@export var volumeoverride : float = 0
 
 var boss_area_trigger : bool = false
 var playercam : PlayerCamera
@@ -37,8 +40,8 @@ func on_new_cinematic_ready( ) -> void :
 	pass
 
 func _on_player_entered( _n : Node2D) -> void :
-	SceneManager.play_cinematic.emit()
 	SceneManager.boss_area_entered.emit()
+	SceneManager.play_cinematic.emit()
 	area_2d.body_entered.disconnect( _on_player_entered )
 	pass
 

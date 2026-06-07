@@ -114,6 +114,7 @@ func _ready() -> void:
 	Messages.player_healed.connect(on_player_healed)
 	Messages.back_to_title.connect(queue_free)
 	Messages.input_hint_changed.connect(on_input_hint_changed)
+	
 	SceneManager.play_cinematic.connect(on_cinematic_mode)
 	SceneManager.cinematic_sequence_finished.connect(on_cinematic_finished)
 	damage_area.damage_taken.connect(on_damage_taken)
@@ -154,7 +155,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	
 	change_state( current_state.handle_input(event))
-	
 	pass
 	
 func initialize_states() -> void:

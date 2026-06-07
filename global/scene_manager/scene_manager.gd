@@ -10,6 +10,9 @@ signal play_cinematic()
 signal cinematic_sequence_finished
 signal boss_area_entered
 signal boss_area_limits(cl:float,cr:float,cb:float,ct:float,cc:float)
+signal original_area_limits(cl:float,cr:float,cb:float,ct:float,cc:float)
+signal boss_theme_music(sfx : AudioStream)
+signal boss_defeated
 @warning_ignore_restore("unused_signal")
 
 var current_scene_uid : String

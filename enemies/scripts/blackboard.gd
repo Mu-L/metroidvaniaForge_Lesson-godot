@@ -19,7 +19,7 @@ var just_attacked : bool = false
 var just_jumped : bool = false
 var can_retaliate : bool = false 
 var is_on_air : bool = false
-
+var theme_song : AudioStreamPlayer = null
 var cinematic_state_played : bool = false
 var enemy_name : String = ""
 
