@@ -133,7 +133,7 @@ func handle_attack_settings( cnt : int ) -> void :
 		#player.velocity.x = player.velocity.x + (playerdir * 2)
 	if attack_count == 5 :
 		if timer >= 0.2 and timer <= 0.34 :
-			player.velocity.x = player.velocity.x + (playerdir * 6)
+			player.velocity.x = player.velocity.x + (playerdir * 2)
 			player.velocity.y = -150
 			player.attack_area.compute_attack_properties(48,24,18,-20 ,2,1)
 		if timer >= 0.6 :

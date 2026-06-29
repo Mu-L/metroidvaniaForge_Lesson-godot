@@ -42,11 +42,11 @@ func handle_input( _event : InputEvent ) -> PlayerState :
 	if _event.is_action_pressed("jump"):
 		return jump
 	
-	if (_event.is_action_pressed("dash") and player.player_can_dash() and candash):
-		return dash
+	#if (_event.is_action_pressed("dash") and player.player_can_dash() and candash):
+		#return dash
 		
-	if _event.is_action_pressed("action")and player.player_can_morph():
-		return morph_ball
+	#if _event.is_action_pressed("action")and player.player_can_morph():
+		#return morph_ball
 		
 	return next_state
 
@@ -80,8 +80,8 @@ func randomize_footstep_sfx() -> void :
 
 func handle_dash_time_cooldown() -> void :
 
-	if player.previous_state != dash :
-		return
+	#if player.previous_state != dash :
+		#return
 		
 	dashcooldownTimer = Timer.new()
 	add_child(dashcooldownTimer)

@@ -13,12 +13,12 @@ var next_state : PlayerState
 @onready var jump: PlayerStateJump = %Jump
 @onready var fall: PlayerStateFall = %Fall
 @onready var crouch: PlayerStateCrouch = %Crouch
-@onready var dash: DashState = %Dash
+#@onready var dash: DashState = %Dash
 @onready var attack: AttackState = %Attack
 @onready var hurt: PlayerHurtState = %Hurt
 @onready var death: DeathState = %Death
-@onready var ground_slam: GroundSlam = %GroundSlam
-@onready var morph_ball: MorphBall = %MorphBall
+#@onready var ground_slam: GroundSlam = %GroundSlam
+#@onready var morph_ball: MorphBall = %MorphBall
 @onready var ledge_hang: PlayerStateLedgeHang = %LedgeHang
 @onready var ledge_climb: PlayerStateLedgeClimb = %LedgeClimb
 

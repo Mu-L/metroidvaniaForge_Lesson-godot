@@ -65,7 +65,7 @@ func on_new_scene_ready( target_name : String , offset : Vector2 ) -> void :
 	if target_name == name :
 		var player : Node = get_tree().get_first_node_in_group("Player")
 		player.global_position = global_position + offset
-		
+		player.collisionTiles = get_parent().get_node("LevelTilemaps/TileMapMain")
 		if level_type == LEVEL_TYPE.DUNGEON :
 			player.enable_point_light_2d(true)
 		else :

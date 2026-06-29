@@ -36,20 +36,20 @@ func exit() -> void:
 	pass
 
 func handle_input( event : InputEvent ) -> PlayerState :
-	if event.is_action_pressed("dash") and player.player_can_dash():
-		return dash
+	#if event.is_action_pressed("dash") and player.player_can_dash():
+		#return dash
 		
 	if event.is_action_pressed("attack"):
-		if player.ground_slam and Input.is_action_pressed("down"):
-			return ground_slam
+		#if player.ground_slam and Input.is_action_pressed("down"):
+			#return ground_slam
 		return attack
 		
 	if event.is_action_released("jump"):
 		player.velocity.y *= 0.5
 		return fall
 		
-	if event.is_action_pressed("action") and player.player_can_morph():
-		return morph_ball
+	#if event.is_action_pressed("action") and player.player_can_morph():
+		#return morph_ball
 		
 	return next_state
 
@@ -74,8 +74,8 @@ func set_jump_frame() -> void:
 
 
 func handle_dash_time_cooldown() -> void :
-	if player.previous_state != dash :
-		return
+	#if player.previous_state != dash :
+		#return
 		
 	dashcooldownTimer = Timer.new()
 	add_child(dashcooldownTimer)

@@ -42,7 +42,7 @@ signal damage_taken()
 @onready var attack_area: AttackArea = %AttackArea
 
 @onready var damage_area: DamageArea = %DamageArea
-@onready var ground_slam_attack_area: AttackArea = %GroundSlamAttackArea
+#@onready var ground_slam_attack_area: AttackArea = %GroundSlamAttackArea
 #@onready var test_alert_label: Label = %Label2 #not needed
 
 

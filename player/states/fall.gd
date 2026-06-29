@@ -38,7 +38,7 @@ func enter() -> void:
 
 	
 	player.gravity_multiplier = fall_gravity_multiplier #increases gravity fall velocity during fall
-	if player.previous_state == jump || player.previous_state == attack || player.previous_state == dash:
+	if player.previous_state == jump || player.previous_state == attack :# player.previous_state == dash:
 		coyoteTimer = 0
 	else :
 		coyoteTimer = coyoteTime
@@ -51,15 +51,15 @@ func exit() -> void:
 	pass
 
 func handle_input( event : InputEvent ) -> PlayerState :
-	if event.is_action_pressed("action") and player.player_can_morph():
-		return morph_ball
+	#if event.is_action_pressed("action") and player.player_can_morph():
+		#return morph_ball
 		
-	if event.is_action_pressed("dash") and player.player_can_dash() and candash:
-		return dash
+	#if event.is_action_pressed("dash") and player.player_can_dash() and candash:
+		#return dash
 		
 	if event.is_action_pressed("attack"):
-		if player.ground_slam and Input.is_action_pressed("down"):
-			return ground_slam
+		#if player.ground_slam and Input.is_action_pressed("down"):
+			#return ground_slam
 		return attack
 		
 	if event.is_action_pressed("jump"):
@@ -126,8 +126,8 @@ func can_wall_jump() -> bool :
 	return false
 
 func handle_dash_time_cooldown() -> void :
-	if player.previous_state != dash :
-		return
+	#if player.previous_state != dash :
+		#return
 		
 	dashcooldownTimer = Timer.new()
 	add_child(dashcooldownTimer)

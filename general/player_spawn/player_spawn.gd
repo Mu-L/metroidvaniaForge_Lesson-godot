@@ -11,8 +11,8 @@ func _ready() -> void:
 	if get_tree().get_first_node_in_group("Player"):
 		#do nothing if there is a player existing in the scene
 		#but access player to assign the tilemap
-		var player: Player = get_tree().get_first_node_in_group("Player")
-		player.collisionTiles = get_parent().get_node("LevelTilemaps/TileMapMain")
+		#var _player: Player = get_tree().get_first_node_in_group("Player")
+		#_player.collisionTiles = get_parent().get_node("LevelTilemaps/TileMapMain")
 		return
 		
 	var player: Player = get_tree().get_first_node_in_group("Player")
