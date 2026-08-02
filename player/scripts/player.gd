@@ -13,10 +13,19 @@ signal damage_taken()
 @onready var collision_stand: CollisionShape2D = %CollisionStand
 @onready var collision_crouch: CollisionShape2D = %CollisionCrouch
 @onready var collision_ledge: CollisionShape2D = %CollisionLedge
+
+
 #@onready var collision_ledge_hang: CollisionShape2D = $CollisionLedgeHang
 @onready var hang_point: Marker2D = %HangPoint
 @onready var world_center: Marker2D = %world_center
 @onready var hang_corner: Marker2D = %hang_corner
+
+@onready var ladder_body: Area2D = %LadderBody
+@onready var ladder_body_col: CollisionShape2D = %LadderBodyCol
+@onready var ladder_top: Area2D = %LadderTop
+@onready var ladder_top_col: CollisionShape2D = %LadderTopCol
+@onready var ladder_bottom: Area2D = %LadderBottom
+@onready var ladder_bottom_col: CollisionShape2D = %LadderBottomCol
 
 
 #@onready var hang_offset := global_position - hang_point.global_position
@@ -134,6 +143,9 @@ var hasdashed : bool = false
 var caninteract : bool = false
 var knockback_force : float = 0
 var can_move : bool = true
+var is_on_ladder : bool = false
+var can_exit_top_ladder : bool = false
+var player_on_top_of_ladder : bool = false
 var alert_player : bool = false
 var ledge_direction : Vector2 = Vector2.ZERO
 var successful_parry : bool = false
@@ -164,6 +176,19 @@ func _ready() -> void:
 	SceneManager.cinematic_sequence_finished.connect(on_cinematic_finished)
 	damage_area.damage_taken.connect(on_damage_taken)
 	damage_area.block_damage_taken.connect(on_block_damage_taken)
+	
+	#player enters ladder 
+	ladder_body.body_entered.connect(_on_ladder_body_body_entered)
+	ladder_body.body_exited.connect(_on_ladder_body_body_exit)
+	
+	#player's top area2D exits ladder - allows player to exit from top
+	ladder_top.body_entered.connect(_on_ladder_top_body_entered)
+	ladder_top.body_exited.connect(_on_ladder_top_body_exit)
+	
+	#player's top area2D exits ladder - allows player to exit from top
+	ladder_bottom.body_entered.connect(_on_ladder_bottom_body_entered)
+	ladder_bottom.body_exited.connect(_on_ladder_bottom_body_exit)
+	
 	point_light_2d.enabled = false
 	
 	initialize_states()
@@ -191,10 +216,10 @@ func _physics_process(_delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_released("jump") and velocity.y < 0 :
 		velocity.y *= 0.5
-	
+		
 	if event.is_action_pressed("action"):
 		Messages.player_interacted.emit(self)
-	
+
 	elif event.is_action_pressed("pause"):
 		get_tree().paused = true
 		var pause_menu : PauseMenu = load("res://UI/pauseMenu/PauseMenu.tscn").instantiate()
@@ -359,3 +384,39 @@ func recover_block_hp (d) -> void :
 
 	player_bp = player_bp + ( player_max_bp * player_block_regen_rate ) * deltatime 
 	pass
+
+func _on_ladder_body_body_entered(body: Node2D) -> void:
+	if body.name == "Ladders":
+		is_on_ladder = true
+		print("ladder body has entered")
+	pass # Replace with function body.
+
+func _on_ladder_body_body_exit(body: Node2D) -> void:
+	if body.name == "Ladders":
+		is_on_ladder = false
+	pass # Replace with function body.
+
+func _on_ladder_top_body_entered(body: Node2D) -> void:
+	if body.name == "Ladders":
+		can_exit_top_ladder = false
+		print("Player is still on a ladder")
+	pass # Replace with function body.
+
+func _on_ladder_top_body_exit(body: Node2D) -> void:
+	if body.name == "Ladders":
+		can_exit_top_ladder = true
+		print("Player can exit top ladder")
+	pass # Replace with function body.
+
+func _on_ladder_bottom_body_entered(body: Node2D) -> void:
+	if body.name == "Ladders":
+		player_on_top_of_ladder = true
+		print("Player is still on a ladder")
+	pass # Replace with function body.
+
+func _on_ladder_bottom_body_exit(body: Node2D) -> void:
+	if body.name == "Ladders":
+		#means player's ladder bottom is not colliding with a ladder
+		player_on_top_of_ladder = false
+		print("Player can exit bottom ladder")
+	pass # Replace with function body.

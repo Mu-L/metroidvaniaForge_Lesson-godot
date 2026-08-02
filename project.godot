@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="New Game Project"
+config/name="Metroidvania_Case_Study"
 run/main_scene="uid://bi3krjsipmw2b"
 config/features=PackedStringArray("4.5", "Mobile")
-config/icon="res://icon.svg"
+config/icon="uid://b5tmatjkc1058"
 
 [audio]
 
@@ -149,6 +149,7 @@ block={
 
 2d_physics/layer_1="ground"
 2d_physics/layer_2="one way platform"
+2d_physics/layer_3="ladders"
 2d_physics/layer_5="Player"
 2d_physics/layer_6="Enemy"
 2d_physics/layer_7="Breakable"

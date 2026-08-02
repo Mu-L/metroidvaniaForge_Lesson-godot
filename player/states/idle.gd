@@ -36,6 +36,10 @@ func handle_input( _event : InputEvent ) -> PlayerState :
 
 	if _event.is_action_pressed("attack"):
 		return attack
+	
+	if _event.is_action_pressed("down") and player.player_on_top_of_ladder:
+		print("player can climb down ladder")
+		return climb_ladder
 		
 	if _event.is_action_pressed("jump"):
 		return jump
@@ -48,8 +52,10 @@ func handle_input( _event : InputEvent ) -> PlayerState :
 func process(_delta: float) -> PlayerState:
 	if player.direction.x != 0 :
 		return run
-	elif player.direction.y > 0.5 :
+		
+	elif player.direction.y > 0.5 and not player.player_on_top_of_ladder:
 		return crouch
+	
 	return next_state
 
 func physics_process(_delta: float) -> PlayerState:

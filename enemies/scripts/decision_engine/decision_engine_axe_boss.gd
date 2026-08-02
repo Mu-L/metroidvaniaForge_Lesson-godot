@@ -46,7 +46,11 @@ func decide() -> EnemyState :
 
 	if blackboard.punishattack and blackboard.just_attacked:
 		return state_punish
-		
+	
+	if enemy.blackboard.wall_detected :
+		enemy.blackboard.wall_detected = false
+		return bs_step_back
+	
 	if blackboard.target :
 		return choose_next_action()
 
@@ -79,7 +83,6 @@ func decide() -> EnemyState :
  #
 	#if blackboard.edge_detected :
 		#enemy.change_direction(-blackboard.dir)
-
 	return es_move
 	
 
@@ -102,12 +105,15 @@ func choose_after_step_back() -> EnemyState:
 	
 	if roll < 10 and blackboard.step_back_counter == 0:
 		blackboard.step_back_counter += 1
+		print("THis is triggered")
 		return bs_step_back
 		
-	if roll < 60:
-		return state_attack
 	if roll < 30:
 		return state_chase
+			
+	if roll < 60:
+		return state_attack
+
 	blackboard.step_back_counter = 0
 	enemy.velocity.x = 0
 	return state_idle

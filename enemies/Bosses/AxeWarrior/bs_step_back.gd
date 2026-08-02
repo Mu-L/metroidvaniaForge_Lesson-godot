@@ -25,7 +25,7 @@ func enter() -> void :
 func re_enter() -> void :
 	#when enemy re-enter same state
 	
-	handle_jump_back()
+	#handle_jump_back()
 	pass
 
 func handle_jump_back() -> void :

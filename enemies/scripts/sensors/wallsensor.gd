@@ -41,7 +41,7 @@ func _physics_process(_delta: float) -> void:
 		if collision_detected :
 			enemy.blackboard.wall_detected = true
 			enemy.blackboard.wall_distance = distance_from_wall
-			
+			print("WALL REACHED")
 			wall_detected.emit()
 		else :
 			enemy.blackboard.wall_detected = false

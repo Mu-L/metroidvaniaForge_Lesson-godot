@@ -26,6 +26,7 @@ var next_state : PlayerState
 @onready var parry: PlayerParryState = %Parry
 @onready var block_break: PlayerBlockBreak = %BlockBreak
 @onready var blocked: PlayerBlockedState = %Blocked
+@onready var climb_ladder: ClimbLadder = %ClimbLadder
 
 
 

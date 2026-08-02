@@ -380,7 +380,7 @@ shape = SubResource("CapsuleShape2D_gplsp")
 
 [node name="WallRaycast" type="RayCast2D" parent="."]
 position = Vector2(0, -56)
-target_position = Vector2(100, 0)
+target_position = Vector2(70, 0)
 script = ExtResource("3_bf73e")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -493,7 +493,7 @@ metadata/_custom_type_script = "uid://bf46rbm1rc8hv"
 [node name="BSStepBack" type="Node" parent="EnemyStateMachine"]
 unique_name_in_owner = true
 script = ExtResource("18_hmasg")
-jumpbackcooldown = 6.0
+jumpbackcooldown = 8.0
 
 [node name="EdgeSensor" type="RayCast2D" parent="."]
 position = Vector2(20, -4)
@@ -513,6 +513,7 @@ state_cinematic = NodePath("../EnemyStateMachine/BSCutScene")
 metadata/_custom_type_script = "uid://c5yujg5qkk83s"
 
 [node name="PLayerSensor" type="Area2D" parent="."]
+visible = false
 position = Vector2(0, -50)
 script = ExtResource("16_dyfso")
 search_duration = 3.0
