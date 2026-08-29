@@ -61,6 +61,11 @@ func handle_input( event : InputEvent ) -> PlayerState :
 		#if player.ground_slam and Input.is_action_pressed("down"):
 			#return ground_slam
 		return attack
+
+	if event.is_action_pressed("up") and player.is_on_ladder:
+		ladder_enter.check_ladder_entry_direction()
+		return ladder_enter
+		
 		
 	if event.is_action_pressed("jump"):
 		if coyoteTimer > 0:
@@ -81,12 +86,13 @@ func process(delta: float) -> PlayerState:
 	coyoteTimer -= delta
 	bufferTimer -= delta
 	landingtimer -= delta
-	
+	check_if_on_ladder()
 	set_fall_frame()
 	return next_state
 
 func physics_process(_delta: float) -> PlayerState:
-	if (check_for_ledge() and !is_below_oneway_platform() and is_above_ground()):
+	if (check_for_ledge() and !is_below_oneway_platform() 
+			and is_above_ground() and not player.is_on_ladder):
 		player.velocity.y = 0
 		return ledge_hang
 		
@@ -162,4 +168,11 @@ func check_for_ledge() -> bool :
 		return true
 	return false
 
- 
+func check_if_on_ladder() -> void :
+	if player.is_on_ladder and not player.player_at_bottom_ladder:
+		player.collision_stand.disabled = true
+		player.collision_crouch.disabled = true
+	else:
+		player.collision_stand.disabled = false
+		pass
+	pass

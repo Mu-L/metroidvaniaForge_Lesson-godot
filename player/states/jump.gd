@@ -55,9 +55,12 @@ func handle_input( event : InputEvent ) -> PlayerState :
 
 func process(_delta: float) -> PlayerState:
 	set_jump_frame()
+	check_if_on_ladder()
 	return next_state
 
 func physics_process(_delta: float) -> PlayerState:
+	
+	
 	if player.is_on_floor():
 		return idle
 		
@@ -95,3 +98,13 @@ func is_below_oneway_platform() -> bool :
 	if player.platformabove.is_colliding() :
 		return true
 	return false
+
+func check_if_on_ladder() -> void :
+	if player.is_on_ladder and player.can_exit_top_ladder:
+		player.collision_stand.disabled = true
+		player.collision_crouch.disabled = true
+		
+	elif player.is_on_ladder and player.player_at_bottom_ladder:
+		player.collision_stand.disabled = false
+		pass
+	pass

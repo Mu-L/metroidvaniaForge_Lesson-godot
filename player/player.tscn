@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://e50yq0do8a2l" path="res://player/sprites/weapon_smears.png" id="10_wodsf"]
 [ext_resource type="Resource" uid="uid://5e8ohapd3kli" path="res://global/VisualFX/hitparticle_settings/playerdamageparticel_v1.tres" id="11_x7c3f"]
 [ext_resource type="Script" uid="uid://c2npu0hsun4y" path="res://player/states/death.gd" id="12_x7c3f"]
-[ext_resource type="Script" uid="uid://66t6ifdca47a" path="res://player/states/ground_slam.gd" id="13_uw77l"]
+[ext_resource type="Script" uid="uid://66t6ifdca47a" path="res://player/states/groundslam.gd" id="13_uw77l"]
 [ext_resource type="Script" uid="uid://crxnp7t2mcd67" path="res://general/scripts/attackarea.gd" id="13_yllr7"]
 [ext_resource type="Script" uid="uid://b1nm4efu4xpu6" path="res://player/player_sprite.gd" id="14_7pqkx"]
 [ext_resource type="Script" uid="uid://cxs7euao2qdr" path="res://player/scripts/morph_ball.gd" id="14_rptt4"]

@@ -13,6 +13,7 @@ func enter() -> void:
 	player.collision_ledge.set_deferred("disabled", true)
 	#player.collision_ledge_hang.set_deferred("disabled" , true)
 	#dash related variables
+	player.can_exit_top_ladder = false
 	player.hasdashed = false
 	candash = true
 	player.gravity_multiplier = 1.0
@@ -38,10 +39,17 @@ func handle_input( _event : InputEvent ) -> PlayerState :
 		return attack
 	
 	if _event.is_action_pressed("down") and player.player_on_top_of_ladder:
-		print("player can climb down ladder")
-		return climb_ladder
+		ladder_enter.check_ladder_entry_direction()
+		print("Entered from Top")
+		return ladder_enter
+
+	if _event.is_action_pressed("up") and player.is_on_ladder:
+		ladder_enter.check_ladder_entry_direction()
+		return ladder_enter
 		
 	if _event.is_action_pressed("jump"):
+		if player.is_on_ladder :
+			player.collision_stand.disabled = true
 		return jump
 
 	#if _event.is_action_pressed("action") and player.player_can_morph():

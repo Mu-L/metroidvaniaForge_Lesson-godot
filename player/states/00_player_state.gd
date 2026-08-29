@@ -27,6 +27,8 @@ var next_state : PlayerState
 @onready var block_break: PlayerBlockBreak = %BlockBreak
 @onready var blocked: PlayerBlockedState = %Blocked
 @onready var climb_ladder: ClimbLadder = %ClimbLadder
+@onready var ladder_enter : LadderEnter = %LadderEnter
+@onready var ladder_exit : LadderExit = %LadderExit
 
 
 

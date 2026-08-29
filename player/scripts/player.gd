@@ -146,6 +146,7 @@ var can_move : bool = true
 var is_on_ladder : bool = false
 var can_exit_top_ladder : bool = false
 var player_on_top_of_ladder : bool = false
+var player_at_bottom_ladder : bool = false
 var alert_player : bool = false
 var ledge_direction : Vector2 = Vector2.ZERO
 var successful_parry : bool = false
@@ -388,7 +389,6 @@ func recover_block_hp (d) -> void :
 func _on_ladder_body_body_entered(body: Node2D) -> void:
 	if body.name == "Ladders":
 		is_on_ladder = true
-		print("ladder body has entered")
 	pass # Replace with function body.
 
 func _on_ladder_body_body_exit(body: Node2D) -> void:
@@ -399,24 +399,22 @@ func _on_ladder_body_body_exit(body: Node2D) -> void:
 func _on_ladder_top_body_entered(body: Node2D) -> void:
 	if body.name == "Ladders":
 		can_exit_top_ladder = false
-		print("Player is still on a ladder")
 	pass # Replace with function body.
 
 func _on_ladder_top_body_exit(body: Node2D) -> void:
 	if body.name == "Ladders":
 		can_exit_top_ladder = true
-		print("Player can exit top ladder")
 	pass # Replace with function body.
 
 func _on_ladder_bottom_body_entered(body: Node2D) -> void:
 	if body.name == "Ladders":
 		player_on_top_of_ladder = true
-		print("Player is still on a ladder")
+		player_at_bottom_ladder = false
 	pass # Replace with function body.
 
 func _on_ladder_bottom_body_exit(body: Node2D) -> void:
 	if body.name == "Ladders":
 		#means player's ladder bottom is not colliding with a ladder
 		player_on_top_of_ladder = false
-		print("Player can exit bottom ladder")
+		player_at_bottom_ladder = true
 	pass # Replace with function body.
